@@ -26,6 +26,33 @@ export default StyleSheet.create({
         marginRight: 30,
         paddingLeft: 16
     },
+    BirthDate:{
+        height: 48,
+        
+        overflow:'hidden',
+        
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 30,
+        marginRight: 30,
+   
+        position:'relative',
+        display:"flex",
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        gap:5
+    },
+    BirthdateInput:{
+        paddingRight:21,
+   backgroundColor:'white',
+flex:1,
+   height:100,
+   paddingLeft:10,
+   borderRadius:5,
+      
+    },
+
     button: {
         backgroundColor: '#788eec',
         marginLeft: 30,
