@@ -21,6 +21,8 @@ export default function LoginScreen({navigation}) {
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
                     .doc(uid)
+                    .collection('info')
+                    .doc(uid)
                     .get()
                     .then(firestoreDocument => {
                         if (!firestoreDocument.exists) {

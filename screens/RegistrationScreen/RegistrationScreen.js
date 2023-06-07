@@ -67,7 +67,7 @@ const[height,setHeight] = useState()
                     height,
                 };
                 const usersRef = firebase.firestore().collection('users')
-                usersRef.doc(uid).set(data).then(() => {  alert("Account creation successful!"),navigation.navigate('Home', {user: data})})
+                usersRef.doc(uid).collection('info').doc(uid).set(data).then(() => {  alert("Account creation successful!"),navigation.navigate('Home', {user: data})})
                     .catch((error) => {
                         alert(error)
                         return "break"
@@ -98,11 +98,13 @@ const[height,setHeight] = useState()
                     value={fullName}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
+                    
                 />
 
 <View style={styles.BirthDate}>
                 
                 <TextInput
+                numberOfLines={2}
     style={styles.BirthdateInput}
     placeholder='Birth Day (DD)'
     placeholderTextColor="#aaaaaa"
@@ -114,6 +116,7 @@ const[height,setHeight] = useState()
 />
 <Text>/</Text>
 <TextInput
+numberOfLines={2}
     style={styles.BirthdateInput}
     placeholder='Birth Month (MM)'
     placeholderTextColor="#aaaaaa"
@@ -125,6 +128,7 @@ const[height,setHeight] = useState()
 />
 <Text>/</Text>
 <TextInput
+numberOfLines={2}
     style={styles.BirthdateInput}
     placeholder='Birth Year (YYYY)'
     placeholderTextColor="#aaaaaa"
