@@ -10,7 +10,7 @@ export default function RegistrationScreen({navigation}) {
     const[BirthDay,setBirthDay] = useState()
     const[BirthMonth,setBirthMonth] = useState()
     const[BirthYear,setBirthYear] = useState()
-    const[birthdate,setBirthDayFinal] = useState()
+
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [weight,setWeight] =useState()
@@ -47,7 +47,7 @@ const[height,setHeight] = useState()
             alert("please enter a valid birthday")
             return
         }
-       setBirthDayFinal(BirthMonth+"/"+BirthDay+"/"+BirthYear)
+       const birthdate =`${BirthMonth}/${BirthDay}/${BirthYear}`;
         if (password !== confirmPassword) {
             alert("Passwords don't match.")
             return

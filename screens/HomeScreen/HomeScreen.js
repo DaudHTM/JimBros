@@ -16,7 +16,7 @@ export default function HomeScreen({ navigation, userData} ) {
     <View>
       <Text>{JSON.stringify(userData)}</Text>
       <TouchableOpacity onPress={onPrBtnClick}  style={styles.tempbutton}>
-        <Text>te,p btnjnjnj</Text>
+        <Text>te,p btn</Text>
       </TouchableOpacity>
     </View>
   );
