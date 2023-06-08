@@ -66,8 +66,16 @@ const[height,setHeight] = useState()
                     weight,
                     height,
                 };
-                const usersRef = firebase.firestore().collection('users')
-                usersRef.doc(uid).collection('info').doc(uid).set(data).then(() => {  alert("Account creation successful!"),navigation.navigate('Home', {user: data})})
+                const prData={
+                    id:uid,
+                };
+                const usersRef = firebase.firestore().collection('users').doc(uid)
+                usersRef.collection('info').doc(uid).set(data).then(() => {  alert("Account creation successful!")})
+                    .catch((error) => {
+                        alert(error)
+        
+                    });
+                    usersRef.collection('pr').doc(uid).set(prData).then(() => {  navigation.navigate('Home', {user: data})})
                     .catch((error) => {
                         alert(error)
                         return "break"

@@ -53,13 +53,5 @@ export default StyleSheet.create({
         fontSize: 20,
         color: '#333333'
     },
-    tempbutton:{
-        position:'absolute',
-        width:30,
-        height:50,
-        color:'black',
-        backgroundColor:'black',
-        top:200,
-        left:200,
-    }
+
 })
