@@ -121,6 +121,7 @@ const[height,setHeight] = useState()
     underlineColorAndroid="transparent"
     autoCapitalize="none" 
     type={Number}
+    keyboardType='number-pad'
 />
 <Text>/</Text>
 <TextInput
@@ -133,6 +134,7 @@ numberOfLines={2}
     underlineColorAndroid="transparent"
     autoCapitalize="none"
     type={Number}
+    keyboardType='number-pad'
 />
 <Text>/</Text>
 <TextInput
@@ -145,6 +147,7 @@ numberOfLines={2}
     underlineColorAndroid="transparent"
     autoCapitalize="none"
     type={Number}
+    keyboardType='number-pad'
 />
 
 </View>
@@ -158,6 +161,7 @@ numberOfLines={2}
     underlineColorAndroid="transparent"
     autoCapitalize="none"
     type={Number}
+    keyboardType='number-pad'
 />
 <TextInput
     style={styles.BirthdateInput}
@@ -168,6 +172,7 @@ numberOfLines={2}
     underlineColorAndroid="transparent"
     autoCapitalize="none"
     type={Number}
+    keyboardType='number-pad'
 />
 </View>
                 <TextInput
