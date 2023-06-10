@@ -2,13 +2,12 @@ import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
-import { LoginScreen, HomeScreen, RegistrationScreen, PrScreen} from './screens'
+import { LoginScreen, HomeScreen, RegistrationScreen, PrScreen, AiScreen, AccountScreen} from './screens'
 import {decode, encode} from 'base-64'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 import { firebase } from './assets/src/firebase/config'
-import AiScreen from './screens/AiScreen/AiScreen';
 
 const Tab = createBottomTabNavigator();
 
