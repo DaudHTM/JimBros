@@ -53,11 +53,23 @@ const[height,setHeight] = useState()
             return
         }
         
+        
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
+            
             .then((response) => {
+                
                 const uid = response.user.uid
+                response.user.sendEmailVerification()
+                .then(()=>{
+                    alert("Account created successfully! Please check your email for verification.")
+                })
+                .catch((error) => {
+           
+                    alert("Error sending email verification. Please try again.");
+                    console.log(error);
+                  });
                 const data = {
                     id: uid,
                     email,
@@ -75,7 +87,7 @@ const[height,setHeight] = useState()
                         alert(error)
         
                     });
-                    usersRef.collection('pr').doc(uid).set(prData).then(() => {  navigation.navigate('Home', {user: data})})
+                    usersRef.collection('pr').doc(uid).set(prData).then(() => {  navigation.navigate('Login')})
                     .catch((error) => {
                         alert(error)
                         return "break"

@@ -35,10 +35,10 @@ export default function App() {
 
   };
 
-  useEffect(() => {
+  const checkUserState=()=>{
     const usersRef = firebase.firestore().collection('users');
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
+      if (user && user.emailVerified) {
         usersRef
           .doc(user.uid).collection('info').doc(user.uid)
           .get()
@@ -54,6 +54,13 @@ export default function App() {
         setLoading(false)
       }
     });
+  };
+
+  useEffect(() => {
+
+
+  checkUserState();
+
   }, []);
 
  
@@ -123,7 +130,12 @@ export default function App() {
         ) : (
           <>
           
-          <Tab.Screen name="Login" component={LoginScreen} />
+          <Tab.Screen
+            name="Login"
+            >
+        {props => <LoginScreen {...props} checkUserState={checkUserState} />}
+            
+            </Tab.Screen>
             <Tab.Screen name="Registration" component={RegistrationScreen} />
         
    
