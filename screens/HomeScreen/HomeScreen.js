@@ -1,21 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
-export default function HomeScreen({ navigation, userData} ) {
-  const onPrBtnClick = () => {
- 
-    navigation.navigate('PRs');
-    
-  };
-
-
-
-
+export default function HomeScreen({ navigation, userData }) {
   return (
-    <View>
-      <Text>{JSON.stringify(userData)}</Text>
-      
+    <View style={styles.container}>
+      <View style={styles.notification}>
+        <Text style={styles.notificationText}> 💪 Welcome back, {userData["fullName"]} </Text>
+        <Text style={styles.getStartedText}>Suggestion of the Day: <Text style={styles.suggestionText}>hit a new PR!</Text></Text>
+      </View>
     </View>
   );
 }

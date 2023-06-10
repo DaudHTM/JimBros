@@ -3,26 +3,27 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   profileContainer: {
-    alignItems: 'center',
-    marginTop: -380,
+    alignItems: 'left',
+    marginTop: "12.5%",
     backgroundColor: '#e3e3e3',
-    width: 1000,
-    height: 200,
+    width: "100%",
+    height: "22.5%",
   },
   profilePicture: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: '#988eec',
-    marginTop: 33,
+    width: "32.5%",
+    height: "85%",
+    borderRadius: "100%",
+    backgroundColor: '#d3d3d3',
+    marginTop: "-10%",
+    marginLeft: "5%"
   },
   usernameContainer: {
-    marginTop: 10,
-    alignItems: 'center',
+    marginTop: "2%",
+    marginLeft: "6%",
+    alignItems: 'center'
   },
   userhandleText: {
     fontSize: 20,
@@ -36,8 +37,7 @@ export default StyleSheet.create({
     textAlign: 'left',
   },
   buttonsContainer: {
-    position: 'absolute',
-    bottom: 20,
+    marginTop: "5%",
     width: '100%',
     flexDirection: 'column',
     alignItems: 'center',
