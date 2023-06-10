@@ -1,14 +1,16 @@
 import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
 import { LoginScreen, HomeScreen, RegistrationScreen, PrScreen} from './screens'
 import {decode, encode} from 'base-64'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 import { firebase } from './assets/src/firebase/config'
+import AiScreen from './screens/AiScreen/AiScreen';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
 
@@ -42,27 +44,71 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarShowLabel: false,
+        }}
+      >
         { user? (
           <>
-          <Stack.Screen name="Home">
+          {/* <Tab.Screen name="Home">
             {props => <HomeScreen {...props} userData={user} />}
-          </Stack.Screen>
-          <Stack.Screen name="Pr">
+          </Tab.Screen>
+          <Tab.Screen name="Pr">
             {props => <PrScreen {...props} userData={user} />}
-          </Stack.Screen>
-        
+          </Tab.Screen> */}
+
+
+          <Tab.Screen
+            name="Home"
+            component={props => <HomeScreen {...props} userData={user} />}
+            options={{
+              tabBarIcon: ({color, size}) => (
+                <MaterialCommunityIcons name="home" color={color} size={size} />
+              ),
+            }}
+          />
+
+          <Tab.Screen
+            name="PRs"
+            component={props => <PrScreen {...props} userData={user} />}
+            options={{
+              tabBarIcon: ({color, size}) => (
+                <MaterialCommunityIcons name="dumbbell" color={color} size={size} />
+              ),
+            }}
+          />
+
+          <Tab.Screen
+            name="AI"
+            component={props => <AiScreen {...props} userData={user} />}
+            options={{
+              tabBarIcon: ({color, size}) => (
+                <MaterialCommunityIcons name="robot" color={color} size={size} />
+              ),
+            }}
+          />
+
+          <Tab.Screen
+            name="Account"
+            component={props => <PrScreen {...props} userData={user} />}
+            options={{
+              tabBarIcon: ({color, size}) => (
+                <MaterialCommunityIcons name="account-circle" color={color} size={size} />
+              ),
+            }}
+          />
           </>
         ) : (
           <>
           
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
+            <Tab.Screen name="Login" component={LoginScreen} />
+            <Tab.Screen name="Registration" component={RegistrationScreen} />
         
    
           </>
         )}
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

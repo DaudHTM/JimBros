@@ -5,7 +5,7 @@ import styles from './styles';
 export default function HomeScreen({ navigation, userData} ) {
   const onPrBtnClick = () => {
  
-    navigation.navigate('Pr');
+    navigation.navigate('PRs');
     
   };
 
@@ -15,9 +15,7 @@ export default function HomeScreen({ navigation, userData} ) {
   return (
     <View>
       <Text>{JSON.stringify(userData)}</Text>
-      <TouchableOpacity onPress={onPrBtnClick}  style={styles.tempbutton}>
-        <Text>te,p btn</Text>
-      </TouchableOpacity>
+      
     </View>
   );
 }
