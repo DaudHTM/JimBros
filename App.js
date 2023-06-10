@@ -17,6 +17,23 @@ export default function App() {
   const [user, setUser] = useState(null)
 
 
+  const signOut=()=>{
+
+
+    setUser(undefined);
+
+    firebase.auth().signOut()
+      .then(() => {
+        alert("Successfully signed out!");
+      })
+      .then(() => {
+        navigation.navigate('Login');
+      })
+      .catch((error) => {
+        console.log("Sign out error:", error);
+      });
+
+  };
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users');
@@ -98,14 +115,15 @@ export default function App() {
                 <MaterialCommunityIcons name="account-circle" color={color} size={size} />
               ),
             }}>
-        {props => <PrScreen {...props} userData={user} />}
+        {props => <AccountScreen {...props} userData={user} signOut={signOut} />}
             
             </Tab.Screen>
+            
           </>
         ) : (
           <>
           
-            <Tab.Screen name="Login" component={LoginScreen} />
+          <Tab.Screen name="Login" component={LoginScreen} />
             <Tab.Screen name="Registration" component={RegistrationScreen} />
         
    

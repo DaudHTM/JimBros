@@ -13,23 +13,12 @@ const CustomButton = ({ title, onPress }) => {
   );
 };
 
-export default function AccountScreen({ navigation, userData }) {
-  const handleSignOut = () => {
-    firebase.auth().signOut()
-      .then(() => {
-        alert("Successfully signed out!");
-      })
-      .then(() => {
-        navigation.navigate('Login');
-      })
-      .catch((error) => {
-        console.log("Sign out error:", error);
-      });
-  };
+export default function AccountScreen({ navigation, userData,signOut }) {
+  
 
   return (
     <View>
-      <CustomButton title="Sign Out" onPress={handleSignOut} />
+      <CustomButton title="Sign Out" onPress={signOut} />
     </View>
   );
 }
