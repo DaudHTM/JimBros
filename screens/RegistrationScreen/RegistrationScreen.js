@@ -62,9 +62,7 @@ const[height,setHeight] = useState()
                 
                 const uid = response.user.uid
                 response.user.sendEmailVerification()
-                .then(()=>{
-                    alert("Account created successfully! Please check your email for verification.")
-                })
+               
                 .catch((error) => {
            
                     alert("Error sending email verification. Please try again.");
@@ -82,7 +80,7 @@ const[height,setHeight] = useState()
                     id:uid,
                 };
                 const usersRef = firebase.firestore().collection('users').doc(uid)
-                usersRef.collection('info').doc(uid).set(data).then(() => {  alert("Account creation successful!")})
+                usersRef.collection('info').doc(uid).set(data).then(() => {  alert("Account creation successful! Please check your email for verification.")})
                     .catch((error) => {
                         alert(error)
         
