@@ -61,43 +61,47 @@ export default function App() {
 
           <Tab.Screen
             name="Home"
-            component={props => <HomeScreen {...props} userData={user} />}
             options={{
               tabBarIcon: ({color, size}) => (
                 <MaterialCommunityIcons name="home" color={color} size={size} />
               ),
-            }}
-          />
+            }}>
+           {props => <HomeScreen {...props} userData={user} />}
+            
+            </Tab.Screen>
 
           <Tab.Screen
             name="PRs"
-            component={props => <PrScreen {...props} userData={user} />}
             options={{
               tabBarIcon: ({color, size}) => (
                 <MaterialCommunityIcons name="dumbbell" color={color} size={size} />
               ),
-            }}
-          />
+            }}>
+          {props => <PrScreen {...props} userData={user} />}
+
+            </Tab.Screen>
 
           <Tab.Screen
             name="AI"
-            component={props => <AiScreen {...props} userData={user} />}
+         
             options={{
               tabBarIcon: ({color, size}) => (
                 <MaterialCommunityIcons name="robot" color={color} size={size} />
               ),
-            }}
-          />
+            }}>
+               {props => <AiScreen {...props} userData={user} />}
+            </Tab.Screen>
 
           <Tab.Screen
             name="Account"
-            component={props => <PrScreen {...props} userData={user} />}
             options={{
               tabBarIcon: ({color, size}) => (
                 <MaterialCommunityIcons name="account-circle" color={color} size={size} />
               ),
-            }}
-          />
+            }}>
+        {props => <PrScreen {...props} userData={user} />}
+            
+            </Tab.Screen>
           </>
         ) : (
           <>
