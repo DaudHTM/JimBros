@@ -6,24 +6,24 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   profileContainer: {
-    alignItems: 'left',
-    marginTop: "12.5%",
+    alignItems: 'flex-start', 
+    marginTop: "12%",
     backgroundColor: '#e3e3e3',
     width: "100%",
-    height: "22.5%",
+    height: "22%",
   },
   profilePicture: {
-    width: "32.5%",
+    width: "32%",
     height: "85%",
-    borderRadius: "100%",
+    borderRadius: 100, 
     backgroundColor: '#d3d3d3',
-    marginTop: "-10%",
-    marginLeft: "5%"
+    marginTop: -10, 
+    marginLeft: "5%",
   },
   usernameContainer: {
     marginTop: "2%",
     marginLeft: "6%",
-    alignItems: 'center'
+    alignItems: 'flex-start', 
   },
   userhandleText: {
     fontSize: 20,

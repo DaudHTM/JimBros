@@ -34,6 +34,7 @@ export default StyleSheet.create({
         width: 80,
         alignItems: "center",
         justifyContent: 'center'
+
     },
     buttonText: {
         color: 'white',
@@ -46,36 +47,59 @@ export default StyleSheet.create({
     entityContainer: {
         marginTop: 16,
         borderBottomColor: '#cccccc',
-        borderBottomWidth: 1,
         paddingBottom: 16
+        
     },
     entityText: {
         fontSize: 20,
         color: '#333333'
     },
-    screenContainer:{
-        top:0,
-        left:0,
-        width:'100%',
-        height:'100%',
+    modalContainer:{
+        position:'absolute',
+        width:320,
+        height:500,
+        bottom:140,
+        backgroundColor:"#dddddd",
+        border:'2px solid black',
+        borderRadius:25,
+        borderWidth:3,
+        borderColor:'grey',
+
         display:'flex',
-        flexDirection:'column',
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'white',
+        flexDirection:'column',
+    overflow:'hidden',
+
 
     },
-    addExerciseButton:{
-        position:'absolute',
-      display:'flex',
-      justifyContent:'center',
-      alignItems:'center',
-        width:190,
-        borderRadius:10,
-        height:60,
-        backgroundColor: '#788eec',
-        bottom:25,
-        flex:1,
-    }
+    exerciseInputHeader:{
+        marginTop:10,
+        flexDirection:'row',
+        gap:20,
+        justifyContent:'center',
+        alignItems:'center',
+  
+    },
+    exerciseHeader:{
+        marginTop:30,
+        flexDirection:'row',
+        gap:50,
+        justifyContent:'center',
+        alignItems:'center',
+  
+        
+    },
+    setInfoInput:{
+       
+   backgroundColor:'white',
+flex:1,
+   height:30,
+   width:53,
+   paddingLeft:10,
+   borderRadius:5,
+      
+    },
+
 
 })
