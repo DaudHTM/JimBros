@@ -108,6 +108,7 @@ const updateFirebase=()=>{
         id:uid,
         exercise:selectedExercise,
         sets:formattedExerciseInfo,
+        created:firebase.database.ServerValue.TIMESTAMP,
         
 
     }
