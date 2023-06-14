@@ -16,34 +16,17 @@ export default function PrScreen({ navigation, userData }) {
   }
 
 
-  useEffect(() => {
  
-    prRef
-
-      .onSnapshot(
-        querySnapshot => {
-          const newEntities = []
-          querySnapshot.forEach(doc => {
-            newEntities.push(doc.data())
-            alert(doc.data().id)
-          })
-          setPrArr(newEntities)
-        },
-        error => {
-          console.log(error)
-        }
-      )
-  }, [])
 
   return (
     <View style={styles.screenContainer}>
       
 
-{toggleModal ? <AddExerciseModal userData={userData}/> : null}
+{toggleModal ? <AddExerciseModal closeModal={toggleModalFunction} userData={userData}/> : null}
       
 
    
-      <TouchableOpacity style={styles.addExerciseButton} onPress={toggleModalFunction}><Text>Add Exercise</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.addExerciseButton} onPress={toggleModalFunction}><Text style={styles.buttonText}>{toggleModal?"Cancel":"Add Workout"}</Text></TouchableOpacity>
 
      
     </View>
