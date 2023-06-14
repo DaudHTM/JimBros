@@ -16,14 +16,14 @@ export default function AddExerciseModal({  closeModal,userData }) {
   const[newSetArr,setNewSetArr]=useState([])
 
 const exerciseListData = [
-    {key:'1', value:'Bench press'},
+    {key:'1', value:'Bench Press'},
     {key:'2', value:'Squat'},
     {key:'3', value:'Deadlift'},
-    {key:'4', value:'Pushps'},
-    {key:'5', value:'Pullups'},
-    {key:'6', value:'Shoulder press'},
-    {key:'7', value:'Lateral raise'},
-    {key:'8', value:'Biceps curl'},
+    {key:'4', value:'Push-ups'},
+    {key:'5', value:'Pull-ups'},
+    {key:'6', value:'Shoulder Press'},
+    {key:'7', value:'Lateral Raise'},
+    {key:'8', value:'Biceps Curl'},
 
 
 ]

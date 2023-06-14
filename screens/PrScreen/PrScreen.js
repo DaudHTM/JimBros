@@ -22,13 +22,13 @@ export default function PrScreen({ navigation, userData }) {
     <View style={styles.screenContainer}>
       
 
-{toggleModal ? <AddExerciseModal closeModal={toggleModalFunction} userData={userData}/> : null}
+{toggleModal ? <AddExerciseModal userData={userData}/> : null}
       
 
    
-      <TouchableOpacity style={styles.addExerciseButton} onPress={toggleModalFunction}><Text style={styles.buttonText}>{toggleModal?"Cancel":"Add Workout"}</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.addExerciseButton} onPress={toggleModalFunction}><Text>Add Exercise</Text></TouchableOpacity>
 
-     
+    <View style={styles.graphContainer}>{/* Add your square graph component here */}</View>
     </View>
   )
 }
