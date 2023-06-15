@@ -25,10 +25,6 @@ export default function PrScreen({ navigation, userData }) {
       <Text style={styles.logButtonText}>📝 Log Workout</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles.addPrButton}>
-      <Text style={styles.addPrButtonText}>🏅 Add PR!</Text>
-    </TouchableOpacity>
-
     <TouchableOpacity style={styles.modalContainer} onPress={() => alert('To be added')}>
       <Text style={styles.modalTitle}>Workout Log</Text>
       <Text style={styles.modalText}>

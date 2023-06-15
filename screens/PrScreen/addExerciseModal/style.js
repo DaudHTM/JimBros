@@ -1,94 +1,94 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  container: {
+  screenContainer: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#FFF',
   },
-  modalContainer:{
-    position:'absolute',
-    zIndex:999,
-    display:'flex',
-    justifyContent:'center',
-    alignItems:'center',
-    flexDirection:'column',
-    backgroundColor:'#F4F5F6',
-    width:300,
-    paddingBottom:35,
-    paddingTop:35,
-    borderRadius:25,
-    borderWidth:1,
-    borderColor:'grey',
-    top:75,
+  logButton: {
+    width: '90%',
+    borderRadius: 10,
+    height: 60,
+    backgroundColor: '#788eec',
+    marginBottom: 20,
+    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  dropdownstyle:{
-    position:'relative',
-    zIndex:3,
-    marginTop:25,
+  logButtonText: {
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
-
-  exerciseHeader:{
-    marginTop:30,
-    marginBottom:20,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-   textAlign:'center',
-   paddingHorizontal:10,
-
-    width:250,
+  modalContainer: {
+    backgroundColor: '#BBB',
+    borderRadius: 10,
+    padding: 20,
+    width: '90%',
+    position: 'relative',
+    alignItems: 'center',
   },
-  rowStyle:{
-        flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    paddingHorizontal:10,
-    borderBottomColor:'white',
-    width:250,
-    borderBottomWidth:3,
-    marginBottom:10,
-    paddingBottom:10,
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#1F1F1F',
   },
-  entityText:{
-width:65,
-fontSize:20,
-textAlign:'center',
+  modalText: {
+    fontSize: 16,
+    fontStyle: 'italic',
+    color: '#000',
   },
-  setInfoInput:{
-    
-    width:60,
-    textAlign:'center',
-    backgroundColor:'white',
-    borderRadius:5,
-    borderColor:'grey',
-    
-    borderWidth:1,
+  graphContainer: {},
+  rowStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    borderBottomColor: 'transparent',
+    width: '100%',
+    borderBottomWidth: 1,
+    marginBottom: 10,
+    paddingBottom: 10,
   },
-  changeSetBtn:{
-    display:'flex',
-    justifyContent:'space-between',
-    alignItems:'center',
-    flexDirection:'row',
-    width:170,
-    marginBottom:16,
+  setInfoInput: {
+    marginTop: 15,
+    width: 80,
+    textAlign: 'center',
+    backgroundColor: '#FFF',
+    borderRadius: 5,
+    borderColor: '#777',
+    borderWidth: 1,
+    color: '#000',
+    paddingVertical: 5,
+    borderWidth: 2,
+  },
+  errorBorder: {
+    borderColor: '#993333',
+    borderWidth: 1.5,
+  },
+  changeSetBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 16,
   },
   buttonText: {
-    color: 'white',
-    fontSize: 13,
-    fontWeight: "bold"
-},
-  button:{
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  button: {
     height: 47,
     borderRadius: 5,
     backgroundColor: '#788eec',
-    width: 80,
-    alignItems: "center",
-    justifyContent: 'center'
+    width: '48%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  doneBtn:{
-    width:170,
+  doneBtn: {
+    width: '100%',
   },
-  errorBorder:{
-    borderColor:'red',
-      },
 });

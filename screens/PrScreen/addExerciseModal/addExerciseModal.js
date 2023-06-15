@@ -176,13 +176,7 @@ const updateFirebase=()=>{
 }
   return (
     <View style={styles.modalContainer}>
-     <SelectList data={exerciseListData} save="value" style={[styles.dropdownstyle, {zIndex:999}]} setSelected={(val) => setSelectedExercise(val)}  />
-
-    <View style={styles.exerciseHeader}> 
-    <Text style={styles.entityText}>Set</Text>
-    <Text style={[styles.entityText]}>Weight</Text>
-    <Text style={[styles.entityText]}>Reps</Text>
-    </View>
+     <SelectList data={exerciseListData} save="value" style={[styles.dropdownStyle, {zIndex:999}]} setSelected={(val) => setSelectedExercise(val)}  />
     
     {newSetArr.map((cur) => (
         <ExerciseRow key={cur} set={cur}/>
