@@ -87,7 +87,7 @@ const[height,setHeight] = useState()
                     birthdate,
                     weight,
                     height,
-                 
+                    username,
                 };
                 const prData={
                     id:uid,
@@ -153,21 +153,7 @@ const[height,setHeight] = useState()
 />
 
 
-<View style={styles.BirthDate}>
-                
-                <TextInput
-                numberOfLines={2}
-    style={styles.BirthdateInput}
-    placeholder='Birth Day (DD)'
-    placeholderTextColor="#aaaaaa"
-    onChangeText={(text) => setBirthDay(text)}
-    value={BirthDay}
-    underlineColorAndroid="transparent"
-    autoCapitalize="none" 
-    type={Number}
-    keyboardType='number-pad'
-/>
-<Text>/</Text>
+<View style={styles.BirthDate}>          
 <TextInput
 numberOfLines={2}
     style={styles.BirthdateInput}
@@ -177,6 +163,19 @@ numberOfLines={2}
     value={BirthMonth}
     underlineColorAndroid="transparent"
     autoCapitalize="none"
+    type={Number}
+    keyboardType='number-pad'
+/>
+<Text>/</Text>
+<TextInput
+                numberOfLines={2}
+    style={styles.BirthdateInput}
+    placeholder='Birth Day (DD)'
+    placeholderTextColor="#aaaaaa"
+    onChangeText={(text) => setBirthDay(text)}
+    value={BirthDay}
+    underlineColorAndroid="transparent"
+    autoCapitalize="none" 
     type={Number}
     keyboardType='number-pad'
 />

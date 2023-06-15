@@ -14,16 +14,16 @@ export default StyleSheet.create({
   },
   profilePicture: {
     width: "32%",
-    height: "85%",
+    height: "80%",
     borderRadius: 100, 
     backgroundColor: '#d3d3d3',
-    marginTop: -10, 
+    marginTop: -25, 
     marginLeft: "5%",
   },
   usernameContainer: {
-    marginTop: "2%",
-    marginLeft: "6%",
+    marginLeft: "15%",
     alignItems: 'flex-start', 
+    width: 100,
   },
   userhandleText: {
     fontSize: 20,
@@ -37,7 +37,7 @@ export default StyleSheet.create({
     textAlign: 'left',
   },
   buttonsContainer: {
-    marginTop: "5%",
+    marginTop: "7%",
     width: '100%',
     flexDirection: 'column',
     alignItems: 'center',

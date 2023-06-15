@@ -20,7 +20,7 @@ export default function AccountScreen({ navigation, userData, signOut }) {
         <View style={styles.profilePicture} />
         <View style={styles.userInfoContainer}>
           <View style={styles.usernameContainer}>
-            <Text style={styles.userhandleText}>@userhandle</Text>
+            <Text style={styles.userhandleText}>{userData["username"]}</Text>
             <Text style={styles.usernameText}>{userData["fullName"]}</Text>
           </View>
         </View>
