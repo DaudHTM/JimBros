@@ -10,7 +10,7 @@ export default function RegistrationScreen({navigation}) {
     const[BirthDay,setBirthDay] = useState()
     const[BirthMonth,setBirthMonth] = useState()
     const[BirthYear,setBirthYear] = useState()
-
+    const[username,setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [weight,setWeight] =useState()
@@ -54,6 +54,18 @@ const[height,setHeight] = useState()
         }
         
         
+ 
+        firebase.firestore().collection('users')
+            .where('username', '==', username)
+            .get()
+            .then((querySnapshot) => {
+                if (!querySnapshot.empty) {
+                    alert('Username is already taken. Please choose a different one.');
+                    return;}
+                else{
+                    
+                
+        
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
@@ -75,11 +87,21 @@ const[height,setHeight] = useState()
                     birthdate,
                     weight,
                     height,
+                 
                 };
                 const prData={
                     id:uid,
                 };
+                const userData={
+                    id:uid,
+                    username,
+                }
                 const usersRef = firebase.firestore().collection('users').doc(uid)
+                usersRef.set(userData).then(()=>{})                    
+                .catch((error) => {
+                    alert(error)
+    
+                });
                 usersRef.collection('info').doc(uid).set(data).then(() => {  alert("Account creation successful! Please check your email for verification.")})
                     .catch((error) => {
                         alert(error)
@@ -96,7 +118,8 @@ const[height,setHeight] = useState()
                 return
         });
 
-      
+    }
+});
     }
 
     return (
@@ -118,6 +141,17 @@ const[height,setHeight] = useState()
                     autoCapitalize="none"
                     
                 />
+
+<TextInput
+    style={styles.input}
+    placeholder='Username'
+    placeholderTextColor="#aaaaaa"
+    onChangeText={(text) => setUsername(text)}
+    value={username}
+    underlineColorAndroid="transparent"
+    autoCapitalize="none"
+/>
+
 
 <View style={styles.BirthDate}>
                 
