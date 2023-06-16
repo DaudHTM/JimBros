@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../assets/src/firebase/config";
@@ -38,13 +38,18 @@ export default function AccountScreen({ navigation, userData, signOut }) {
     var inches = height % 12;
     return `${feet} ft ${inches} in`;
   };
+  
+  const [toggleModal,setToggleModal] = useState(false);
+
 
   const onPencilPress = () => {
-    navigation.navigate("Edit Bio");
-  };
+    setToggleModal(!toggleModal);
+  }
+
 
   return (
     <View style={styles.container}>
+      {toggleModal ? <EditBioScreen userData={userData} closeModal={onPencilPress}/> : null}
       <View style={styles.profileContainer}>
         <View style={styles.profilePicture} />
         <View style={styles.usernameContainer}>
