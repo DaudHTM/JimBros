@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
-import { LoginScreen, HomeScreen, RegistrationScreen, PrScreen, AiScreen, AccountScreen} from './screens'
+import { LoginScreen, HomeScreen, RegistrationScreen, PrScreen, SocialScreen, AccountScreen} from './screens'
 import {decode, encode} from 'base-64'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 if (!global.btoa) {  global.btoa = encode }
@@ -105,14 +105,14 @@ export default function App() {
             </Tab.Screen>
 
           <Tab.Screen
-            name="AI"
+            name="Social"
          
             options={{
               tabBarIcon: ({color, size}) => (
                 <MaterialCommunityIcons name="robot" color={color} size={size} />
               ),
             }}>
-               {props => <AiScreen {...props} userData={user} />}
+               {props => <SocialScreen {...props} userData={user} />}
             </Tab.Screen>
 
           <Tab.Screen

@@ -27,19 +27,18 @@ export default StyleSheet.create({
     padding: 20,
     width: '90%',
     position: 'relative',
-    alignItems: "left",
+    alignItems: 'flex-start', // Updated value
   },
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: "#1f1f1f",
+    color: '#1f1f1f',
   },
   modalText: {
     fontSize: 16,
     fontStyle: 'italic',
-    color: "#000",
+    color: '#000',
   },
-  graphContainer: {
-  },
+  graphContainer: {},
 });
