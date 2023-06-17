@@ -38,20 +38,24 @@ export default StyleSheet.create({
   },
   bioContainer: {
     marginLeft: "45%",
-    marginTop: "-30%",
+    marginTop: "-32%",
     alignItems: "flex-start",
     width: "50%",
   },
   bioHeading: {
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: "bold",
     color: "#000",
     textAlign: "left",
   },
   bioText: {
-    fontSize: 20,
+    fontSize: 16,
     color: "#000",
     textAlign: "left",
+  },
+  bioButtonContainer: {
+    marginTop: "2%",
+    alignItems: "center",
   },
   bioButton: {
     backgroundColor: "#6495ED",

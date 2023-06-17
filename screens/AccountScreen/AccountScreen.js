@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../assets/src/firebase/config";
@@ -38,18 +38,18 @@ export default function AccountScreen({ navigation, userData, signOut }) {
     var inches = height % 12;
     return `${feet} ft ${inches} in`;
   };
-  
-  const [toggleModal,setToggleModal] = useState(false);
 
+  const [toggleModal, setToggleModal] = useState(false);
 
   const onPencilPress = () => {
     setToggleModal(!toggleModal);
-  }
-
+  };
 
   return (
     <View style={styles.container}>
-      {toggleModal ? <EditBioScreen userData={userData} closeModal={onPencilPress}/> : null}
+      {toggleModal ? (
+        <EditBioScreen userData={userData} closeModal={onPencilPress} />
+      ) : null}
       <View style={styles.profileContainer}>
         <View style={styles.profilePicture} />
         <View style={styles.usernameContainer}>
@@ -67,9 +67,14 @@ export default function AccountScreen({ navigation, userData, signOut }) {
           <Text
             style={styles.bioText}
           >{`Weight: ${userData["weight"]} lbs`}</Text>
-          <TouchableOpacity style={styles.bioButton} onPress={onPencilPress}>
-            <Text style={styles.bioButtonText}>✏️</Text>
-          </TouchableOpacity>
+          <Text style={styles.bioText}>
+            Click the pencil icon to add an About Me!
+          </Text>
+          <View style={styles.bioButtonContainer}>
+            <TouchableOpacity style={styles.bioButton} onPress={onPencilPress}>
+              <Text style={styles.bioButtonText}>✏️</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       <View style={styles.buttonsContainer}>
