@@ -107,6 +107,16 @@ const[height,setHeight] = useState()
                         alert(error)
         
                     });
+                    usersRef.collection('notification').doc(uid).set(prData).then(() => { })
+                    .catch((error) => {
+                        alert(error)
+        
+                    });
+                    usersRef.collection('social').doc(uid).set(prData).then(() => {  })
+                    .catch((error) => {
+                        alert(error)
+        
+                    });
                     usersRef.collection('pr').doc(uid).set(prData).then(() => {  navigation.navigate('Login')})
                     .catch((error) => {
                         alert(error)

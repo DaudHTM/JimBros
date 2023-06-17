@@ -109,7 +109,7 @@ export default function App() {
          
             options={{
               tabBarIcon: ({color, size}) => (
-                <MaterialCommunityIcons name="robot" color={color} size={size} />
+                <MaterialCommunityIcons name="account-group" color={color} size={size} />
               ),
             }}>
                {props => <SocialScreen {...props} userData={user} />}

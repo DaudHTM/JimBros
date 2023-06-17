@@ -6,6 +6,6 @@ export { default as RegistrationScreen } from './RegistrationScreen/Registration
 
 export { default as PrScreen } from './PrScreen/PrScreen'
 
-export { default as SocialScreen } from './AiScreen/SocialScreen'
+export { default as SocialScreen } from './SocialScreen/SocialScreen'
 
 export { default as AccountScreen } from './AccountScreen/AccountScreen'
