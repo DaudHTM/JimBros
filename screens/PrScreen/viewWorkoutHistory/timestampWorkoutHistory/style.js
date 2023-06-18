@@ -9,15 +9,15 @@ export default StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 5,
-    right: 5,
-    backgroundColor: "transparent",
+    top: 0,
+    left: 10,
+    backgroundColor: "#transparent",
     padding: 10,
     borderRadius: 5
   },
   backButtonText: {
-    color: "#FFF",
-    fontSize: 28,
+    color: "#000",
+    fontSize: 32,
     fontWeight: "bold"
   },
   title: {
@@ -27,25 +27,25 @@ export default StyleSheet.create({
     color: "#000",
     textAlign: "left"
   },
-  workoutList: {
+  exerciseList: {
     width: "100%",
     marginTop: "5%",
     textAlign: "center",
   },
-  workoutItem: {
+  exerciseItem: {
     width: "100%",
     height: 60,
     justifyContent: "center",
   },
-  workoutItemText: {
+  exerciseItemText: {
     fontSize: 20,
     color: "#000",
     fontWeight: "bold",
   },
-  workoutItemOdd: {
+  exerciseItemOdd: {
     backgroundColor: "#dddddd"
   },
-  workoutItemEven: {
+  exerciseItemEven: {
     backgroundColor: "#cccccc"
   },
 });

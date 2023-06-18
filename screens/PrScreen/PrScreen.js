@@ -1,11 +1,11 @@
-import React, { useState, useEffect, Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 import { firebase } from '../../assets/src/firebase/config'
 import {AddExerciseModal} from "./addExerciseModal/addExerciseModal"
-import {ViewWorkoutHistory} from "./ViewWorkoutHistory/ViewWorkoutHistory"
+import {ViewWorkoutHistory} from "./viewWorkoutHistory/ViewWorkoutHistory"
 
-export default function PrScreen({ navigation,userData }) {
+export default function PrScreen({ navigation, userData }) {
   const uid = userData.id
   const prRef = firebase.firestore().collection('users').doc(uid).collection('pr')
   const [toggleModal, setToggleModal] = useState(false);
@@ -53,17 +53,12 @@ export default function PrScreen({ navigation,userData }) {
 
   const showWorkouts = () => {
     setWorkoutHistory(!workoutHistory);
-    prRef.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id);
-      });
-    });
   }
 
   return (
     <View style={styles.screenContainer}>
     {toggleModal ? <AddExerciseModal userData={userData} closeModal={toggleModalFunction}/> : null}
-    {workoutHistory ? <ViewWorkoutHistory userData={userData} closeModal={showWorkouts}/> : null}
+    {workoutHistory ? <ViewWorkoutHistory userData={userData} closeModal={showWorkouts} prData={prRef}/> : null}
     <TouchableOpacity style={styles.logButton} onPress={toggleModalFunction}>
       <Text style={styles.logButtonText}>📝 Log Workout</Text>
     </TouchableOpacity>
