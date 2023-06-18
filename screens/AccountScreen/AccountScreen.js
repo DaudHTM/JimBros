@@ -50,6 +50,9 @@ export default function AccountScreen({ navigation, userData, signOut }) {
       {toggleModal ? (
         <EditBioScreen userData={userData} closeModal={onPencilPress} />
       ) : null}
+      <TouchableOpacity style={styles.editBioButton} onPress={onPencilPress}>
+        <Text style={styles.pencilIcon}>✏️ Edit Bio</Text>
+      </TouchableOpacity>
       <View style={styles.profileContainer}>
         <View style={styles.profilePicture} />
         <View style={styles.usernameContainer}>
@@ -57,23 +60,13 @@ export default function AccountScreen({ navigation, userData, signOut }) {
           <Text style={styles.usernameText}>{userData["fullName"]}</Text>
         </View>
         <View style={styles.bioContainer}>
-          <Text style={styles.bioHeading}>Bio</Text>
-          <Text style={styles.bioText}>{`Age: ${calcAge(
-            userData["birthdate"]
-          )}`}</Text>
-          <Text style={styles.bioText}>{`Height: ${calcHeight(
-            userData["height"]
-          )}`}</Text>
-          <Text
-            style={styles.bioText}
-          >{`Weight: ${userData["weight"]} lbs`}</Text>
-          <Text style={styles.bioText}>
-            Click the pencil icon to add an About Me!
+          <Text style={styles.bioHeading}>Physical</Text>
+          <Text style={styles.bioInfoText}>
+            {`${calcAge(userData["birthdate"])} years · ${calcHeight(userData["height"])} · ${userData["weight"]} lbs`}{'\n'}
           </Text>
+          <Text style={styles.bioHeading}>About Me</Text>
           <View style={styles.bioButtonContainer}>
-            <TouchableOpacity style={styles.bioButton} onPress={onPencilPress}>
-              <Text style={styles.bioButtonText}>✏️</Text>
-            </TouchableOpacity>
+            <Text style={styles.aboutMeText}>Click the pencil icon to add an About Me!</Text>
           </View>
         </View>
       </View>
@@ -102,3 +95,4 @@ export default function AccountScreen({ navigation, userData, signOut }) {
     </View>
   );
 }
+

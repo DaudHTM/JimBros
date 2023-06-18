@@ -7,7 +7,6 @@ export default StyleSheet.create({
   },
   profileContainer: {
     alignItems: "flex-start",
-    marginTop: "12%",
     backgroundColor: "#e3e3e3",
     width: "100%",
     height: "22%",
@@ -54,21 +53,20 @@ export default StyleSheet.create({
     textAlign: "left",
   },
   bioButtonContainer: {
-    marginTop: "2%",
     alignItems: "center",
   },
-  bioButton: {
-    backgroundColor: "#6495ED",
-    height: 20,
-    width: "20%",
-    borderRadius: 5,
+  editBioButton: {
+    backgroundColor: '#e3e3e3',
     paddingHorizontal: 10,
-    paddingVertical: 2,
-    marginBottom: 10,
+    paddingVertical: 10,
+    left: "70%",
+    alignSelf: "left",
+    marginTop: "12%",
   },
-  bioButtonText: {
-    fontSize: 12,
+  pencilIcon: {
+    fontSize: 14,
     textAlign: "center",
+    fontWeight: "bold"
   },
   buttonsContainer: {
     marginTop: "7%",
@@ -103,4 +101,12 @@ export default StyleSheet.create({
     fontSize: 16,
     textAlign: "right",
   },
+  bioInfoText: {
+    fontSize: 14,
+    color: "#444"
+  },
+  bioHeading: {
+    fontSize: 20,
+    fontWeight: "bold"
+  }
 });
