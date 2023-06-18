@@ -41,6 +41,7 @@ export default StyleSheet.create({
     fontSize: 20,
     color: "#000",
     fontWeight: "bold",
+    textAlign: "center",
   },
   exerciseItemOdd: {
     backgroundColor: "#dddddd"
