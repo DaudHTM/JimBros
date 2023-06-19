@@ -56,7 +56,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   editBioButton: {
-    backgroundColor: '#e3e3e3',
+    backgroundColor: "#e3e3e3",
     paddingHorizontal: 10,
     paddingVertical: 10,
     left: "70%",
@@ -66,7 +66,7 @@ export default StyleSheet.create({
   pencilIcon: {
     fontSize: 14,
     textAlign: "center",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   buttonsContainer: {
     marginTop: "7%",
@@ -103,10 +103,10 @@ export default StyleSheet.create({
   },
   bioInfoText: {
     fontSize: 14,
-    color: "#444"
+    color: "#444",
   },
   bioHeading: {
     fontSize: 20,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });

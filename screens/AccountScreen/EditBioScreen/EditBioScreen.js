@@ -4,7 +4,7 @@ import styles from "./style";
 import { firebase } from "../../../assets/src/firebase/config";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function EditBioScreen({ userData, closeModal }) {
+export default function EditBioScreen({ userData, closeModal, updateValue }) {
   const [fullName, setFullName] = useState(userData["fullName"]);
   const [username, setUsername] = useState(userData["username"]);
   const [email, setEmail] = useState(userData["email"]);
@@ -19,11 +19,16 @@ export default function EditBioScreen({ userData, closeModal }) {
   );
   const [height, setHeight] = useState(userData["height"]);
   const [weight, setWeight] = useState(userData["weight"]);
+  const [aboutMe, setAboutMe] = useState(userData["aboutMe"]);
 
   const updateFirebase = () => {
     const uid = userData.id;
     const usersRef = firebase.firestore().collection("users").doc(uid);
     const birthdate = birthMonth + "/" + birthDay + "/" + birthYear;
+    const identification = {
+      id: uid,
+      username: username,
+    };
     const bioInfo = {
       id: uid,
       fullName: fullName,
@@ -32,7 +37,10 @@ export default function EditBioScreen({ userData, closeModal }) {
       birthdate: birthdate,
       height: height,
       weight: weight,
+      aboutMe: aboutMe,
     };
+
+    usersRef.set(identification);
 
     usersRef
       .collection("info")
@@ -46,6 +54,10 @@ export default function EditBioScreen({ userData, closeModal }) {
         return "break";
       });
     closeModal();
+  };
+
+  const refresh = () => {
+    updateValue();
   };
 
   return (
@@ -124,9 +136,25 @@ export default function EditBioScreen({ userData, closeModal }) {
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
+      <TextInput
+        style={styles.aboutMeInput}
+        placeholderTextColor="#aaaaaa"
+        placeholder={
+          userData["aboutMe"] == null
+            ? "Add an about me! (80 character limit)"
+            : "About Me: " + userData["aboutMe"]
+        }
+        onChangeText={(text) => setAboutMe(text)}
+        underlineColorAndroid="transparent"
+        autoCapitalize="none"
+        maxLength={80}
+      />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => updateFirebase()}
+          onPress={() => {
+            updateFirebase();
+            refresh();
+          }}
           style={styles.button}
         >
           <Text style={styles.buttonText}>Update Info</Text>

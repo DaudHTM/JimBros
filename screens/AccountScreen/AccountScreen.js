@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
+import { NativeModules } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../assets/src/firebase/config";
 
@@ -45,10 +46,41 @@ export default function AccountScreen({ navigation, userData, signOut }) {
     setToggleModal(!toggleModal);
   };
 
+  const [uniqueValue, setUniqueValue] = useState(1);
+  const usersRef = firebase.firestore().collection("users");
+
+  const updateValue = () => {
+    //setUniqueValue(newVal);
+  };
+
+  //const userRef = firebase.firestore().collection('users').doc(uid).collection('info')
+
+  useEffect(() => {
+    return usersRef.onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if (data.id === userData.id) {
+          userData = data;
+        }
+      });
+    });
+    // const fetchData = async () => {
+    //   try {
+    //   } catch (error) {
+    //     console.log("Error fetching user account:", error);
+    //   }
+    // };
+    // fetchData();
+  }, []);
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} key={uniqueValue}>
       {toggleModal ? (
-        <EditBioScreen userData={userData} closeModal={onPencilPress} />
+        <EditBioScreen
+          userData={userData}
+          closeModal={onPencilPress}
+          updateValue={updateValue}
+        />
       ) : null}
       <TouchableOpacity style={styles.editBioButton} onPress={onPencilPress}>
         <Text style={styles.pencilIcon}>✏️ Edit Bio</Text>
@@ -56,17 +88,30 @@ export default function AccountScreen({ navigation, userData, signOut }) {
       <View style={styles.profileContainer}>
         <View style={styles.profilePicture} />
         <View style={styles.usernameContainer}>
-          <Text style={styles.userhandleText}>{userData["username"]}</Text>
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            style={styles.userhandleText}
+          >
+            {userData["username"]}
+          </Text>
           <Text style={styles.usernameText}>{userData["fullName"]}</Text>
         </View>
         <View style={styles.bioContainer}>
           <Text style={styles.bioHeading}>Physical</Text>
           <Text style={styles.bioInfoText}>
-            {`${calcAge(userData["birthdate"])} years · ${calcHeight(userData["height"])} · ${userData["weight"]} lbs`}{'\n'}
+            {`${calcAge(userData["birthdate"])} years · ${calcHeight(
+              userData["height"]
+            )} · ${userData["weight"]} lbs`}
+            {"\n"}
           </Text>
           <Text style={styles.bioHeading}>About Me</Text>
           <View style={styles.bioButtonContainer}>
-            <Text style={styles.aboutMeText}>Click the pencil icon to add an About Me!</Text>
+            <Text style={styles.aboutMeText}>
+              {userData["aboutMe"] == null
+                ? "Click the pencil icon to add an About Me!"
+                : userData["aboutMe"]}
+            </Text>
           </View>
         </View>
       </View>
@@ -95,4 +140,3 @@ export default function AccountScreen({ navigation, userData, signOut }) {
     </View>
   );
 }
-

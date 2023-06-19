@@ -26,6 +26,15 @@ export default StyleSheet.create({
     backgroundColor: "white",
     textAlign: "left",
   },
+  aboutMeInput: {
+    marginTop: "5%",
+    height: "10%",
+    width: "80%",
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    backgroundColor: "white",
+    textAlign: "left",
+  },
   button: {
     backgroundColor: "#6495ED",
     borderRadius: 5,
