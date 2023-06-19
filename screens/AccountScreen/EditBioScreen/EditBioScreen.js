@@ -4,7 +4,7 @@ import styles from "./style";
 import { firebase } from "../../../assets/src/firebase/config";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function EditBioScreen({ userData, closeModal, updateValue }) {
+export default function EditBioScreen({ userData, closeModal }) {
   const [fullName, setFullName] = useState(userData["fullName"]);
   const [username, setUsername] = useState(userData["username"]);
   const [email, setEmail] = useState(userData["email"]);
@@ -56,12 +56,11 @@ export default function EditBioScreen({ userData, closeModal, updateValue }) {
     closeModal();
   };
 
-  const refresh = () => {
-    updateValue();
-  };
-
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={closeModal}>
+        <Text style={styles.backButtonText}>←</Text>
+      </TouchableOpacity>
       <View style={styles.headingContainer}>
         <Text style={styles.heading}>Edit Your Info</Text>
       </View>
@@ -153,7 +152,6 @@ export default function EditBioScreen({ userData, closeModal, updateValue }) {
         <TouchableOpacity
           onPress={() => {
             updateFirebase();
-            refresh();
           }}
           style={styles.button}
         >

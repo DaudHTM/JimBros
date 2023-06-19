@@ -7,14 +7,14 @@ export default StyleSheet.create({
     width: "100%",
   },
   headingContainer: {
-    marginTop: "5%",
     alignItems: "center",
   },
   heading: {
-    fontSize: 20,
+    fontSize: 26,
     fontWeight: "bold",
+    marginTop: "4%",
     color: "#000",
-    textAlign: "center",
+    textAlign: "left"
   },
   input: {
     marginTop: "5%",
@@ -28,8 +28,8 @@ export default StyleSheet.create({
   },
   aboutMeInput: {
     marginTop: "5%",
-    height: "10%",
     width: "80%",
+    paddingVertical: 10,
     borderRadius: 5,
     paddingHorizontal: 10,
     backgroundColor: "white",
@@ -46,5 +46,18 @@ export default StyleSheet.create({
     fontSize: 20,
     color: "white",
     textAlign: "center",
+  },
+  backButton: {
+    position: "absolute",
+    top: 0,
+    left: 10,
+    backgroundColor: "#transparent",
+    padding: 10,
+    borderRadius: 5
+  },
+  backButtonText: {
+    color: "#000",
+    fontSize: 32,
+    fontWeight: "bold"
   },
 });

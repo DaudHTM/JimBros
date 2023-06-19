@@ -3,14 +3,11 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { NativeModules } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../assets/src/firebase/config";
-
-import { useNavigation } from "@react-navigation/native";
-
 import { EditBioScreen } from "./EditBioScreen/EditBioScreen";
+import { AboutUsScreen } from "./AboutUsScreen/AboutUsScreen";
 
 /*
 TO DO:
-Add user bio in gray rectangle (log in firebase)
 Allow user to add profile picture in circle (log in firebase)
 */
 
@@ -40,20 +37,19 @@ export default function AccountScreen({ navigation, userData, signOut }) {
     return `${feet} ft ${inches} in`;
   };
 
-  const [toggleModal, setToggleModal] = useState(false);
+  const [toggleBioScreen, setToggleBioScreen] = useState(false);
 
   const onPencilPress = () => {
-    setToggleModal(!toggleModal);
+    setToggleBioScreen(!toggleBioScreen);
   };
 
-  const [uniqueValue, setUniqueValue] = useState(1);
+  const [toggleAboutUsScreen, setToggleAboutUsScreen] = useState(false);
+
+  const onAboutUsPress = () => {
+    setToggleAboutUsScreen(!toggleAboutUsScreen);
+  };
+
   const usersRef = firebase.firestore().collection("users");
-
-  const updateValue = () => {
-    //setUniqueValue(newVal);
-  };
-
-  //const userRef = firebase.firestore().collection('users').doc(uid).collection('info')
 
   useEffect(() => {
     return usersRef.onSnapshot((querySnapshot) => {
@@ -64,24 +60,12 @@ export default function AccountScreen({ navigation, userData, signOut }) {
         }
       });
     });
-    // const fetchData = async () => {
-    //   try {
-    //   } catch (error) {
-    //     console.log("Error fetching user account:", error);
-    //   }
-    // };
-    // fetchData();
   }, []);
 
   return (
-    <View style={styles.container} key={uniqueValue}>
-      {toggleModal ? (
-        <EditBioScreen
-          userData={userData}
-          closeModal={onPencilPress}
-          updateValue={updateValue}
-        />
-      ) : null}
+    <View style={styles.container}>
+      {toggleBioScreen ? ( <EditBioScreen userData={userData} closeModal={onPencilPress}/>) : null}
+      {toggleAboutUsScreen ? ( <AboutUsScreen closeModal={onAboutUsPress}/>) : null}
       <TouchableOpacity style={styles.editBioButton} onPress={onPencilPress}>
         <Text style={styles.pencilIcon}>✏️ Edit Bio</Text>
       </TouchableOpacity>
@@ -128,7 +112,7 @@ export default function AccountScreen({ navigation, userData, signOut }) {
           <Text style={styles.buttonText}>Terms of Service</Text>
           <Text style={styles.arrow}>&gt;</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={onAboutUsPress}>
           <Text style={styles.buttonText}>About Us</Text>
           <Text style={styles.arrow}>&gt;</Text>
         </TouchableOpacity>
