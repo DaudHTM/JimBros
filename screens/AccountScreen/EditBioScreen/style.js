@@ -28,15 +28,13 @@ export default StyleSheet.create({
   },
   button: {
     backgroundColor: "#6495ED",
-    height: 20,
-    width: "30%",
     borderRadius: 5,
-    paddingHorizontal: 10,
-    paddingVertical: 2,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     marginTop: "5%",
   },
   buttonText: {
-    fontSize: 12,
+    fontSize: 20,
     color: "white",
     textAlign: "center",
   },

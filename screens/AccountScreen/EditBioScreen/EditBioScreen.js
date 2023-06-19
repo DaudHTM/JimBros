@@ -55,32 +55,32 @@ export default function EditBioScreen({ userData, closeModal }) {
       </View>
       <TextInput
         style={styles.input}
-        value={fullName}
         placeholderTextColor="#aaaaaa"
+        placeholder={"Full name: " + fullName}
         onChangeText={(text) => setFullName(text)}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
-        value={username}
         placeholderTextColor="#aaaaaa"
+        placeholder={"Username: " + username}
         onChangeText={(text) => setUsername(text)}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
-        value={email}
         placeholderTextColor="#aaaaaa"
+        placeholder={"Email: " + email}
         onChangeText={(text) => setEmail(text)}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
-        value={birthMonth}
         placeholderTextColor="#aaaaaa"
+        placeholder={"Birth month: " + birthMonth}
         onChangeText={(text) => setBirthMonth(text)}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
@@ -90,8 +90,8 @@ export default function EditBioScreen({ userData, closeModal }) {
       <TextInput
         numberOfLines={2}
         style={styles.input}
-        value={birthDay}
         placeholderTextColor="#aaaaaa"
+        placeholder={"Birth day: " + birthDay}
         onChangeText={(text) => setBirthDay(text)}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
@@ -100,8 +100,8 @@ export default function EditBioScreen({ userData, closeModal }) {
       />
       <TextInput
         style={styles.input}
-        value={birthYear}
         placeholderTextColor="#aaaaaa"
+        placeholder={"Birth year: " + birthYear}
         onChangeText={(text) => setBirthYear(text)}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
@@ -110,16 +110,16 @@ export default function EditBioScreen({ userData, closeModal }) {
       />
       <TextInput
         style={styles.input}
-        value={height}
         placeholderTextColor="#aaaaaa"
+        placeholder={"Height: " + height}
         onChangeText={(text) => setHeight(text)}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
-        value={weight}
         placeholderTextColor="#aaaaaa"
+        placeholder={"Weight: " + weight}
         onChangeText={(text) => setWeight(text)}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
@@ -129,7 +129,7 @@ export default function EditBioScreen({ userData, closeModal }) {
           onPress={() => updateFirebase()}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Save</Text>
+          <Text style={styles.buttonText}>Update Info</Text>
         </TouchableOpacity>
       </View>
     </View>

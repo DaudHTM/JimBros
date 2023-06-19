@@ -16,7 +16,7 @@ export default StyleSheet.create({
     borderRadius: 5
   },
   backButtonText: {
-    color: "#FFF",
+    color: "#000",
     fontSize: 28,
     fontWeight: "bold"
   },
