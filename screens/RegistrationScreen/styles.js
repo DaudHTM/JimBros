@@ -42,7 +42,7 @@ export default StyleSheet.create({
 
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: "8%",
+        marginLeft: "0%",
         marginRight: "8%",
 
         position: 'relative',
@@ -59,6 +59,7 @@ export default StyleSheet.create({
         height: 100,
         paddingLeft: 10,
         borderRadius: 5,
+        marginLeft: "8%"
 
     },
 
