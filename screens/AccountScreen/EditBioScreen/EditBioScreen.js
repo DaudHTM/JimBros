@@ -68,7 +68,9 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.input}
         placeholderTextColor="#aaaaaa"
         placeholder={"Full name: " + fullName}
-        onChangeText={(text) => setFullName(text)}
+        onChangeText={(text) => {
+          text != "" ? setFullName(text) : setFullName(userData["fullName"]);
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
@@ -76,7 +78,9 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.input}
         placeholderTextColor="#aaaaaa"
         placeholder={"Username: " + username}
-        onChangeText={(text) => setUsername(text)}
+        onChangeText={(text) => {
+          text != "" ? setUsername(text) : setUsername(userData["username"]);
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
@@ -84,7 +88,9 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.input}
         placeholderTextColor="#aaaaaa"
         placeholder={"Email: " + email}
-        onChangeText={(text) => setEmail(text)}
+        onChangeText={(text) => {
+          text != "" ? setEmail(text) : setEmail(userData["email"]);
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
@@ -92,7 +98,11 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.input}
         placeholderTextColor="#aaaaaa"
         placeholder={"Birth month: " + birthMonth}
-        onChangeText={(text) => setBirthMonth(text)}
+        onChangeText={(text) => {
+          text != ""
+            ? setBirthMonth(text)
+            : setBirthMonth(userData["birthdate"].substring(0, 2));
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
         type={Number}
@@ -103,7 +113,11 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.input}
         placeholderTextColor="#aaaaaa"
         placeholder={"Birth day: " + birthDay}
-        onChangeText={(text) => setBirthDay(text)}
+        onChangeText={(text) => {
+          text != ""
+            ? setBirthDay(text)
+            : setBirthDay(userData["birthdate"].substring(3, 5));
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
         type={Number}
@@ -113,7 +127,11 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.input}
         placeholderTextColor="#aaaaaa"
         placeholder={"Birth year: " + birthYear}
-        onChangeText={(text) => setBirthYear(text)}
+        onChangeText={(text) => {
+          text != ""
+            ? setBirthYear(text)
+            : setBirthYear(userData["birthdate"].substring(6));
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
         type={Number}
@@ -123,7 +141,9 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.input}
         placeholderTextColor="#aaaaaa"
         placeholder={"Height: " + height}
-        onChangeText={(text) => setHeight(text)}
+        onChangeText={(text) => {
+          text != "" ? setHeight(text) : setHeight(userData["height"]);
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
@@ -131,7 +151,9 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.input}
         placeholderTextColor="#aaaaaa"
         placeholder={"Weight: " + weight}
-        onChangeText={(text) => setWeight(text)}
+        onChangeText={(text) => {
+          text != "" ? setWeight(text) : setWeight(userData["weight"]);
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
@@ -139,11 +161,13 @@ export default function EditBioScreen({ userData, closeModal }) {
         style={styles.aboutMeInput}
         placeholderTextColor="#aaaaaa"
         placeholder={
-          userData["aboutMe"] == null
+          userData["aboutMe"] == ""
             ? "Add an about me! (80 character limit)"
             : "About Me: " + userData["aboutMe"]
         }
-        onChangeText={(text) => setAboutMe(text)}
+        onChangeText={(text) => {
+          text != "" ? setAboutMe(text) : setAboutMe(userData["aboutMe"]);
+        }}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
         maxLength={80}
