@@ -8,10 +8,19 @@ export default StyleSheet.create({
     title: {
 
     },
+    datePicker: {
+        flex: 1
+    },
+    registrationText: {
+        fontSize: 25,
+        marginLeft: "8%",
+        marginTop: 35,
+        fontWeight: "bold"
+    },
     logo: {
         flex: 1,
         height: 120,
-        width: 90,
+        width: 120,
         alignSelf: "center",
         margin: 30
     },
@@ -22,41 +31,41 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
+        marginLeft: "8%",
+        marginRight: "8%",
+        paddingLeft: "5%"
     },
-    BirthDate:{
+    BirthDate: {
         height: 48,
-        
-        overflow:'hidden',
-        
+
+        overflow: 'hidden',
+
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-   
-        position:'relative',
-        display:"flex",
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        gap:5
+        marginLeft: "8%",
+        marginRight: "8%",
+
+        position: 'relative',
+        display: "flex",
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 5
     },
-    BirthdateInput:{
-        paddingRight:21,
-   backgroundColor:'white',
-flex:1,
-   height:100,
-   paddingLeft:10,
-   borderRadius:5,
-      
+    BirthdateInput: {
+        paddingRight: 21,
+        backgroundColor: 'white',
+        flex: 1,
+        height: 100,
+        paddingLeft: 10,
+        borderRadius: 5,
+
     },
 
     button: {
         backgroundColor: '#788eec',
-        marginLeft: 30,
-        marginRight: 30,
+        marginLeft: "8%",
+        marginRight: "8%",
         marginTop: 20,
         height: 48,
         borderRadius: 5,
