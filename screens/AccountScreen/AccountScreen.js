@@ -64,8 +64,12 @@ export default function AccountScreen({ navigation, userData, signOut }) {
 
   return (
     <View style={styles.container}>
-      {toggleBioScreen ? ( <EditBioScreen userData={userData} closeModal={onPencilPress}/>) : null}
-      {toggleAboutUsScreen ? ( <AboutUsScreen closeModal={onAboutUsPress}/>) : null}
+      {toggleBioScreen ? (
+        <EditBioScreen userData={userData} closeModal={onPencilPress} />
+      ) : null}
+      {toggleAboutUsScreen ? (
+        <AboutUsScreen closeModal={onAboutUsPress} />
+      ) : null}
       <TouchableOpacity style={styles.editBioButton} onPress={onPencilPress}>
         <Text style={styles.pencilIcon}>✏️ Edit Bio</Text>
       </TouchableOpacity>
@@ -92,7 +96,7 @@ export default function AccountScreen({ navigation, userData, signOut }) {
           <Text style={styles.bioHeading}>About Me</Text>
           <View style={styles.bioButtonContainer}>
             <Text style={styles.aboutMeText}>
-              {userData["aboutMe"] == null
+              {userData["aboutMe"] == ""
                 ? "Click the pencil icon to add an About Me!"
                 : userData["aboutMe"]}
             </Text>

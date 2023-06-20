@@ -3,7 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 import { firebase } from '../../assets/src/firebase/config'
 import {AddExerciseModal} from "./addExerciseModal/addExerciseModal"
-import {ViewWorkoutHistory} from "./viewWorkoutHistory/ViewWorkoutHistory"
+import {ViewWorkoutHistory} from "./viewWorkoutHistory/viewWorkoutHistory"
 
 export default function PrScreen({ navigation, userData }) {
   const uid = userData.id

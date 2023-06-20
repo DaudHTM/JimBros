@@ -1,273 +1,300 @@
-import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from './styles';
-import { firebase } from '../../assets/src/firebase/config'
+import React, { useState } from "react";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import styles from "./styles";
+import { firebase } from "../../assets/src/firebase/config";
 
-export default function RegistrationScreen({navigation}) {
-    const [fullName, setFullName] = useState('')
-    const [email, setEmail] = useState('')
-    const[BirthDay,setBirthDay] = useState()
-    const[BirthMonth,setBirthMonth] = useState()
-    const[BirthYear,setBirthYear] = useState()
-    const[username,setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [weight,setWeight] =useState()
-const[height,setHeight] = useState()
+export default function RegistrationScreen({ navigation }) {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [BirthDay, setBirthDay] = useState();
+  const [BirthMonth, setBirthMonth] = useState();
+  const [BirthYear, setBirthYear] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [weight, setWeight] = useState();
+  const [height, setHeight] = useState();
 
-    const onFooterLinkPress = () => {
-        navigation.navigate('Login')
+  const onFooterLinkPress = () => {
+    navigation.navigate("Login");
+  };
+
+  const onRegisterPress = () => {
+    if (isNaN(BirthDay) || isNaN(BirthMonth) || isNaN(BirthYear)) {
+      alert("please enter a valid birthday");
+      return;
+    }
+    if (isNaN(height)) {
+      alert("Please enter a valid height");
+      return;
+    }
+    if (height > 120 || height < 20) {
+      alert("Please enter a valid height");
+      return;
+    }
+    if (isNaN(weight)) {
+      alert("please enter a valid weight");
+      return;
+    }
+    if (weight < 40 || weight > 900) {
+      alert("please enter a valid weight");
+      return;
+    }
+    if (
+      BirthMonth > 12 ||
+      BirthMonth < 0 ||
+      BirthDay < 0 ||
+      BirthDay > 31 ||
+      BirthYear > 2023 ||
+      BirthYear < 1923
+    ) {
+      alert("please enter a valid birthday");
+      return;
+    }
+    const birthdate = `${BirthMonth}/${BirthDay}/${BirthYear}`;
+    if (password !== confirmPassword) {
+      alert("Passwords don't match.");
+      return;
     }
 
-    const onRegisterPress = () => {
-      
-        if(isNaN(BirthDay) || isNaN(BirthMonth) || isNaN(BirthYear) ){
-            alert("please enter a valid birthday")
-            return
-
-        }
-        if(isNaN(height)){
-            alert("Please enter a valid height")
-            return
-        }
-        if(height>120 || height<20){
-            alert("Please enter a valid height")
-            return
-        }
-        if(isNaN(weight)){
-            alert("please enter a valid weight")
-            return
-        }
-        if(weight<40 || weight>900){
-            alert("please enter a valid weight")
-            return
-        }
-        if( BirthMonth>12 || BirthMonth<0 || BirthDay<0 || BirthDay>31 || BirthYear>2023 || BirthYear<1923){
-            alert("please enter a valid birthday")
-            return
-        }
-       const birthdate =`${BirthMonth}/${BirthDay}/${BirthYear}`;
-        if (password !== confirmPassword) {
-            alert("Passwords don't match.")
-            return
-        }
-        
-        
- 
-        firebase.firestore().collection('users')
-            .where('username', '==', username)
-            .get()
-            .then((querySnapshot) => {
-                if (!querySnapshot.empty) {
-                    alert('Username is already taken. Please choose a different one.');
-                    return;}
-                else{
-                    
-                
-        
-        firebase
+    firebase
+      .firestore()
+      .collection("users")
+      .where("username", "==", username)
+      .get()
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          alert("Username is already taken. Please choose a different one.");
+          return;
+        } else {
+          firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            
+
             .then((response) => {
-                
-                const uid = response.user.uid
-                response.user.sendEmailVerification()
-               
+              const uid = response.user.uid;
+              response.user
+                .sendEmailVerification()
+
                 .catch((error) => {
-           
-                    alert("Error sending email verification. Please try again.");
-                    console.log(error);
-                  });
-                const data = {
-                    id: uid,
-                    email,
-                    fullName,
-                    birthdate,
-                    weight,
-                    height,
-                    username,
-                };
-                const prData={
-                    id:uid,
-                };
-                const userData={
-                    id:uid,
-                    username,
-                }
-                const usersRef = firebase.firestore().collection('users').doc(uid)
-                usersRef.set(userData).then(()=>{})                    
-                .catch((error) => {
-                    alert(error)
-    
+                  alert("Error sending email verification. Please try again.");
+                  console.log(error);
                 });
-                usersRef.collection('info').doc(uid).set(data).then(() => {  alert("Account creation successful! Please check your email for verification.")})
-                    .catch((error) => {
-                        alert(error)
-        
-                    });
-                    usersRef.collection('notification').doc(uid).set(prData).then(() => { })
-                    .catch((error) => {
-                        alert(error)
-        
-                    });
-                    usersRef.collection('social').doc(uid).set(prData).then(() => {  })
-                    .catch((error) => {
-                        alert(error)
-        
-                    });
-                    usersRef.collection('pr').doc(uid).set(prData).then(() => {  navigation.navigate('Login')})
-                    .catch((error) => {
-                        alert(error)
-                        return "break"
-                    });
+              const data = {
+                id: uid,
+                email,
+                fullName,
+                birthdate,
+                weight,
+                height,
+                username,
+                aboutMe: "",
+              };
+              const prData = {
+                id: uid,
+              };
+              const userData = {
+                id: uid,
+                username,
+              };
+              const usersRef = firebase
+                .firestore()
+                .collection("users")
+                .doc(uid);
+              usersRef
+                .set(userData)
+                .then(() => {})
+                .catch((error) => {
+                  alert(error);
+                });
+              usersRef
+                .collection("info")
+                .doc(uid)
+                .set(data)
+                .then(() => {
+                  alert(
+                    "Account creation successful! Please check your email for verification."
+                  );
+                })
+                .catch((error) => {
+                  alert(error);
+                });
+              usersRef
+                .collection("notification")
+                .doc(uid)
+                .set(prData)
+                .then(() => {})
+                .catch((error) => {
+                  alert(error);
+                });
+              usersRef
+                .collection("social")
+                .doc(uid)
+                .set(prData)
+                .then(() => {})
+                .catch((error) => {
+                  alert(error);
+                });
+              usersRef
+                .collection("pr")
+                .doc(uid)
+                .set(prData)
+                .then(() => {
+                  navigation.navigate("Login");
+                })
+                .catch((error) => {
+                  alert(error);
+                  return "break";
+                });
             })
             .catch((error) => {
-                alert(error)
-                return
-        });
+              alert(error);
+              return;
+            });
+        }
+      });
+  };
 
-    }
-});
-    }
+  return (
+    <View style={styles.container}>
+      <KeyboardAwareScrollView
+        style={{ flex: 1, width: "100%" }}
+        keyboardShouldPersistTaps="always"
+      >
+        <Image
+          style={styles.logo}
+          source={require("../../assets/img/icon.png")}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Full Name"
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(text) => setFullName(text)}
+          value={fullName}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
 
-    return (
-        <View style={styles.container}>
-            <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
-                keyboardShouldPersistTaps="always">
-                <Image
-                    style={styles.logo}
-                    source={require('../../assets/img/icon.png')}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Full Name'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setFullName(text)}
-                    value={fullName}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                    
-                />
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(text) => setUsername(text)}
+          value={username}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
 
-<TextInput
-    style={styles.input}
-    placeholder='Username'
-    placeholderTextColor="#aaaaaa"
-    onChangeText={(text) => setUsername(text)}
-    value={username}
-    underlineColorAndroid="transparent"
-    autoCapitalize="none"
-/>
-
-
-<View style={styles.BirthDate}>          
-<TextInput
-numberOfLines={2}
-    style={styles.BirthdateInput}
-    placeholder='Birth Month (MM)'
-    placeholderTextColor="#aaaaaa"
-    onChangeText={(text) => setBirthMonth(text)}
-    value={BirthMonth}
-    underlineColorAndroid="transparent"
-    autoCapitalize="none"
-    type={Number}
-    keyboardType='number-pad'
-/>
-<Text>/</Text>
-<TextInput
-                numberOfLines={2}
-    style={styles.BirthdateInput}
-    placeholder='Birth Day (DD)'
-    placeholderTextColor="#aaaaaa"
-    onChangeText={(text) => setBirthDay(text)}
-    value={BirthDay}
-    underlineColorAndroid="transparent"
-    autoCapitalize="none" 
-    type={Number}
-    keyboardType='number-pad'
-/>
-<Text>/</Text>
-<TextInput
-numberOfLines={2}
-    style={styles.BirthdateInput}
-    placeholder='Birth Year (YYYY)'
-    placeholderTextColor="#aaaaaa"
-    onChangeText={(text) => setBirthYear(text)}
-    value={BirthYear}
-    underlineColorAndroid="transparent"
-    autoCapitalize="none"
-    type={Number}
-    keyboardType='number-pad'
-/>
-
-</View>
-<View style={styles.BirthDate}>
-<TextInput
-    style={styles.BirthdateInput}
-    placeholder='Height (inches)'
-    placeholderTextColor="#aaaaaa"
-    onChangeText={(text) => setHeight(text)}
-    value={height}
-    underlineColorAndroid="transparent"
-    autoCapitalize="none"
-    type={Number}
-    keyboardType='number-pad'
-/>
-<TextInput
-    style={styles.BirthdateInput}
-    placeholder='Weight (lbs)'
-    placeholderTextColor="#aaaaaa"
-    onChangeText={(text) => setWeight(text)}
-    value={weight}
-    underlineColorAndroid="transparent"
-    autoCapitalize="none"
-    type={Number}
-    keyboardType='number-pad'
-/>
-</View>
-                <TextInput
-                    style={styles.input}
-                    placeholder='E-mail'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-
-               
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Password'
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Confirm Password'
-                    onChangeText={(text) => setConfirmPassword(text)}
-                    value={confirmPassword}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onRegisterPress()}>
-                    <Text style={styles.buttonTitle}>Create account</Text>
-                </TouchableOpacity>
-                <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
-                </View>
-            </KeyboardAwareScrollView>
+        <View style={styles.BirthDate}>
+          <TextInput
+            numberOfLines={2}
+            style={styles.BirthdateInput}
+            placeholder="Birth Month (MM)"
+            placeholderTextColor="#aaaaaa"
+            onChangeText={(text) => setBirthMonth(text)}
+            value={BirthMonth}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+            type={Number}
+            keyboardType="number-pad"
+          />
+          <Text>/</Text>
+          <TextInput
+            numberOfLines={2}
+            style={styles.BirthdateInput}
+            placeholder="Birth Day (DD)"
+            placeholderTextColor="#aaaaaa"
+            onChangeText={(text) => setBirthDay(text)}
+            value={BirthDay}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+            type={Number}
+            keyboardType="number-pad"
+          />
+          <Text>/</Text>
+          <TextInput
+            numberOfLines={2}
+            style={styles.BirthdateInput}
+            placeholder="Birth Year (YYYY)"
+            placeholderTextColor="#aaaaaa"
+            onChangeText={(text) => setBirthYear(text)}
+            value={BirthYear}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+            type={Number}
+            keyboardType="number-pad"
+          />
         </View>
-    )
+        <View style={styles.BirthDate}>
+          <TextInput
+            style={styles.BirthdateInput}
+            placeholder="Height (inches)"
+            placeholderTextColor="#aaaaaa"
+            onChangeText={(text) => setHeight(text)}
+            value={height}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+            type={Number}
+            keyboardType="number-pad"
+          />
+          <TextInput
+            style={styles.BirthdateInput}
+            placeholder="Weight (lbs)"
+            placeholderTextColor="#aaaaaa"
+            onChangeText={(text) => setWeight(text)}
+            value={weight}
+            underlineColorAndroid="transparent"
+            autoCapitalize="none"
+            type={Number}
+            keyboardType="number-pad"
+          />
+        </View>
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          placeholderTextColor="#aaaaaa"
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholderTextColor="#aaaaaa"
+          secureTextEntry
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          style={styles.input}
+          placeholderTextColor="#aaaaaa"
+          secureTextEntry
+          placeholder="Confirm Password"
+          onChangeText={(text) => setConfirmPassword(text)}
+          value={confirmPassword}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => onRegisterPress()}
+        >
+          <Text style={styles.buttonTitle}>Create account</Text>
+        </TouchableOpacity>
+        <View style={styles.footerView}>
+          <Text style={styles.footerText}>
+            Already got an account?{" "}
+            <Text onPress={onFooterLinkPress} style={styles.footerLink}>
+              Log in
+            </Text>
+          </Text>
+        </View>
+      </KeyboardAwareScrollView>
+    </View>
+  );
 }
