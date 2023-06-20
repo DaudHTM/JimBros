@@ -26,7 +26,32 @@ const styles = StyleSheet.create({
   suggestionText: {
     color: '#FFD580',
     fontWeight: 'bold',
-  }
+  },
+  calendarContainer: {
+    width: '100%',
+    paddingTop: 10,
+    paddingBottom: 15,
+    marginTop: 20,
+    backgroundColor: '#E6E6E6',
+    paddingHorizontal: 20,
+  },
+  calendarTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  streakContainer: {
+    alignItems: 'center',
+    marginTop: 15,
+  },
+  streakText: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
 });
 
 export default styles;
