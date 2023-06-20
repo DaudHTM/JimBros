@@ -11,7 +11,7 @@ export default function RegistrationScreen({ navigation }) {
     const [BirthDay, setBirthDay] = useState();
     const [BirthMonth, setBirthMonth] = useState();
     const [BirthYear, setBirthYear] = useState();
-    const [BirthDateObj, setBirthDateObj] = useState()
+    const [BirthDateObj, setBirthDateObj] = useState(new Date())
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
