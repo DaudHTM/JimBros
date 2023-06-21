@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     alignItems: "center",
-    height: "100%",
     width: "100%",
+    flex: 1,
   },
   headingContainer: {
     alignItems: "center",
@@ -15,6 +15,18 @@ export default StyleSheet.create({
     marginTop: "4%",
     color: "#000",
     textAlign: "left"
+  },
+  profilePictureContainer: {
+    width: "32%",
+    aspectRatio: 1,
+    marginTop: 30,
+    marginBottom: 20,
+  },
+  profilePicture: {
+    borderRadius: 100,
+    width: "100%",
+    height: "100%",
+    aspectRatio: 1,
   },
   input: {
     marginTop: "5%",
