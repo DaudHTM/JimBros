@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./style";
 
 export default function AboutUsScreen({closeModal }) {
-
+  // adsjngksadglmg
   return (
     <View style={styles.container}>
         <Text style={styles.title}>About Us</Text>
