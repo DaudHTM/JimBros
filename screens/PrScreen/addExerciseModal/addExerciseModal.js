@@ -150,6 +150,7 @@ const updateFirebase=()=>{
 
     const uid = userData.id;
     const usersRef = firebase.firestore().collection('users').doc(uid);
+    const currentTime = firebase.firestore.FieldValue.serverTimestamp().toDate();
     var formattedExerciseInfo= {}
     var counter = 0;
     exerciseInfo.map((currentExercise)=>{
@@ -159,7 +160,6 @@ const updateFirebase=()=>{
         formattedExerciseInfo[exerciseKey]=currentExercise;
     });
     const exerciseData = {
-        id:uid,
         exercise:selectedExercise,
         sets:formattedExerciseInfo,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
