@@ -6,20 +6,26 @@ export default StyleSheet.create({
     height: "100%",
     width: "100%",
   },
-  headingContainer: {
-    alignItems: "center",
-  },
   heading: {
     fontSize: 26,
     fontWeight: "bold",
-    marginTop: "4%",
+    marginLeft: "31%",
+    marginTop: "3.5%",
+    marginBottom: "2%",
     color: "#000",
-    textAlign: "left"
+    textAlign: "left",
+  },
+  subheading: {
+    fontSize: 20,
+    marginLeft: "10%",
+    marginTop: 20,
+    fontWeight: "bold",
   },
   input: {
     marginTop: "5%",
+    marginLeft: "10%",
     alignItems: "center",
-    height: "6%",
+    height: "8%",
     width: "80%",
     borderRadius: 5,
     paddingHorizontal: 10,
@@ -28,7 +34,9 @@ export default StyleSheet.create({
   },
   aboutMeInput: {
     marginTop: "5%",
+    marginLeft: "10%",
     width: "80%",
+    height: "16%",
     paddingVertical: 10,
     borderRadius: 5,
     paddingHorizontal: 10,
@@ -40,7 +48,9 @@ export default StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 20,
     paddingVertical: 10,
+    marginLeft: "30%",
     marginTop: "5%",
+    width: "40%",
   },
   buttonText: {
     fontSize: 20,
@@ -53,11 +63,11 @@ export default StyleSheet.create({
     left: 10,
     backgroundColor: "#transparent",
     padding: 10,
-    borderRadius: 5
+    borderRadius: 5,
   },
   backButtonText: {
     color: "#000",
     fontSize: 32,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 });

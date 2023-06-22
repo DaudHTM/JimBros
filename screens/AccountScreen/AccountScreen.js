@@ -14,19 +14,17 @@ Allow user to add profile picture in circle (log in firebase)
 export default function AccountScreen({ navigation, userData, signOut }) {
   const calcAge = (birthdate) => {
     const todayDate = new Date();
-    if (parseInt(todayDate.getMonth()) > parseInt(birthdate.substring(0, 2))) {
-      return todayDate.getFullYear() - birthdate.substring(6);
+    if (parseInt(todayDate.getMonth()) > parseInt(birthdate.split("/")[0])) {
+      return todayDate.getFullYear() - birthdate.split("/")[2];
     } else if (
-      parseInt(todayDate.getMonth()) < parseInt(birthdate.substring(0, 2))
+      parseInt(todayDate.getMonth()) < parseInt(birthdate.split("/")[0])
     ) {
-      return todayDate.getFullYear() - birthdate.substring(6) - 1;
+      return todayDate.getFullYear() - birthdate.split("/")[2] - 1;
     } else {
-      if (
-        parseInt(todayDate.getDate()) >= parseInt(birthdate.substring(3, 5))
-      ) {
-        return todayDate.getFullYear() - birthdate.substring(6);
+      if (parseInt(todayDate.getDate()) >= parseInt(birthdate.split("/")[1])) {
+        return todayDate.getFullYear() - birthdate.split("/")[2];
       } else {
-        return todayDate.getFullYear() - birthdate.substring(6) - 1;
+        return todayDate.getFullYear() - birthdate.split("/")[2] - 1;
       }
     }
   };
@@ -48,19 +46,6 @@ export default function AccountScreen({ navigation, userData, signOut }) {
   const onAboutUsPress = () => {
     setToggleAboutUsScreen(!toggleAboutUsScreen);
   };
-
-  const usersRef = firebase.firestore().collection("users");
-
-  useEffect(() => {
-    return usersRef.onSnapshot((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        if (data.id === userData.id) {
-          userData = data;
-        }
-      });
-    });
-  }, []);
 
   return (
     <View style={styles.container}>
