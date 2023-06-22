@@ -60,7 +60,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     left: "70%",
-    alignSelf: "left",
+    alignSelf: "flex-start",
     marginTop: "12%",
   },
   pencilIcon: {

@@ -3,45 +3,41 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 import { firebase } from '../../assets/src/firebase/config'
 import {AddExerciseModal} from "./addExerciseModal/addExerciseModal"
-import {ViewWorkoutHistory} from "./viewWorkoutHistory/ViewWorkoutHistory"
+import {ViewWorkoutHistory} from "./ViewWorkoutHistory/ViewWorkoutHistory"
 
 export default function PrScreen({ navigation, userData }) {
   const uid = userData.id
   const prRef = firebase.firestore().collection('users').doc(uid).collection('pr')
   const [toggleModal, setToggleModal] = useState(false);
   const [workoutHistory, setWorkoutHistory] = useState(false);
-
+  const [workoutData,setWorkoutData] = useState([]);
   const [log1, setLog1] = useState("Log 1");
   const [log2, setLog2] = useState("Log 2");
   const [log3, setLog3] = useState("Log 3");
 
   useEffect(() => {
+
     const fetchData = async () => {
-      const snapshot = await prRef.orderBy("timestamp", "desc").limit(3).get();
-      const documents = snapshot.docs;
-      if (documents.length > 0) {
-        const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-        setLog1("You worked out on " + documents[0].data().timestamp.toDate().toLocaleDateString(undefined, options));
-      } else {
-        setLog1("Add more workouts to see your progress!");
-        setLog2("Add more workouts to see your progress!");
-        setLog3("Add more workouts to see your progress!");
-      }
-  
-      if (documents.length > 1) {
-        const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-        setLog2("You worked out on " + documents[1].data().timestamp.toDate().toLocaleDateString(undefined, options));
-      } else {
-        setLog2("Add more workouts to see your progress!");
-        setLog3("Add more workouts to see your progress!");
+      const currentDate = firebase.firestore.FieldValue.serverTimestamp().toDate();
+
+      currentDocId = currentDate.getMonth()+"/"+currentDate.getYear();
+
+      workoutsRef = firebase.firestore().collection('users').doc(userData.id).collection('workouts')
+
+      workoutsSnapshots = workoutsRef.document(currentDocId).get()
+
+      if(workoutsSnapshots.exists){
+
+      setWorkoutData(workoutsSnapshots.to_dict());
+
+      console.log(workoutData)
+
+
+      }else{
+        workoutsRef.doc(currentDocId).set({month :currentDate.getMonth(),})
+        workouts
       }
 
-      if (documents.length > 2) {
-        const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-        setLog3("You worked out on " + documents[2].data().timestamp.toDate().toLocaleDateString(undefined, options));
-      } else {
-        setLog3("Add more workouts to see your progress!");
-      }
     };
     fetchData();
   }, []);

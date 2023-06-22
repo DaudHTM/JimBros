@@ -6,6 +6,7 @@ import { firebase } from "../../assets/src/firebase/config";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function RegistrationScreen({ navigation }) {
+
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [BirthDay, setBirthDay] = useState();
@@ -17,7 +18,7 @@ export default function RegistrationScreen({ navigation }) {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [weight, setWeight] = useState();
     const [height, setHeight] = useState();
-
+    const [showBirthDatePicker,setShowBirthDatePicker] = useState(false);
     const onFooterLinkPress = () => {
         navigation.navigate("Login");
     };
@@ -30,6 +31,7 @@ export default function RegistrationScreen({ navigation }) {
             setBirthMonth(date.getMonth());
             setBirthYear(date.getFullYear());
         }
+        setShowBirthDatePicker(false);
 
     }
 
@@ -77,6 +79,11 @@ export default function RegistrationScreen({ navigation }) {
             return;
         }
 
+        const currentDate = new Date();
+   
+        const currentDocumentId = `${currentDate.getMonth() + 1},${currentDate.getFullYear()}`;
+console.log(currentDate)
+
         firebase
             .firestore()
             .collection("users")
@@ -113,22 +120,25 @@ export default function RegistrationScreen({ navigation }) {
                             const prData = {
                                 id: uid,
                             };
-                            const userData = {
+                            const userPublicData = {
                                 id: uid,
                                 username,
+                                fullName,
+                                aboutMe:"",
+
                             };
                             const usersRef = firebase
                                 .firestore()
                                 .collection("users")
                                 .doc(uid);
                             usersRef
-                                .set(userData)
+                                .set(userPublicData)
                                 .then(() => { })
                                 .catch((error) => {
                                     alert(error);
                                 });
                             usersRef
-                                .collection("info")
+                                .collection("private")
                                 .doc(uid)
                                 .set(data)
                                 .then(() => {
@@ -141,7 +151,7 @@ export default function RegistrationScreen({ navigation }) {
                                 });
                             usersRef
                                 .collection("notification")
-                                .doc(uid)
+                                .doc(currentDocumentId)
                                 .set(prData)
                                 .then(() => { })
                                 .catch((error) => {
@@ -156,8 +166,8 @@ export default function RegistrationScreen({ navigation }) {
                                     alert(error);
                                 });
                             usersRef
-                                .collection("pr")
-                                .doc(uid)
+                                .collection("workouts")
+                                .doc(currentDocumentId)
                                 .set(prData)
                                 .then(() => {
                                     navigation.navigate("Login");
@@ -286,13 +296,17 @@ export default function RegistrationScreen({ navigation }) {
                     <Text style={{ fontSize: 20 }}>Birthdate: </Text>
 
                     <View style={styles.datePicker}>
-                        <DateTimePicker
+                    {showBirthDatePicker?(    <DateTimePicker
                             testID="dateTimePicker"
                             value={BirthDateObj}
                             mode="date"
+                          
+
                             onChange={onDateChange}
                             style={{ height: 40 }}
-                        />
+                        />):null}
+                        <TouchableOpacity onPress={()=>setShowBirthDatePicker(!showBirthDatePicker)}><Text>{BirthMonth+"/"+BirthDay+"/"+BirthYear}</Text></TouchableOpacity>
+                    
                     </View>
                 </View>
 
