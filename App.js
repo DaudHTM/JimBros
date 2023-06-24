@@ -40,7 +40,7 @@ export default function App() {
     firebase.auth().onAuthStateChanged(user => {
       if (user && user.emailVerified) {
         usersRef
-          .doc(user.uid).collection('info').doc(user.uid)
+          .doc(user.uid).collection('private').doc(user.uid)
           .get()
           .then((document) => {
             const userData = document.data()

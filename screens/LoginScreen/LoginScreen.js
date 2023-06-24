@@ -42,7 +42,7 @@ export default function LoginScreen({navigation,checkUserState}) {
                 const usersRef = firebase.firestore().collection('users')
                 usersRef
                     .doc(uid)
-                    .collection('info')
+                    .collection('private')
                     .doc(uid)
                     .get()
                     .then(firestoreDocument => {

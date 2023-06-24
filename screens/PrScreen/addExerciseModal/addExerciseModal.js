@@ -4,14 +4,14 @@ import styles from './style'
 import { firebase } from '../../../assets/src/firebase/config'
 import { SelectList } from 'react-native-dropdown-select-list'
 
-export default function AddExerciseModal({  closeModal,userData }) {
+export default function AddExerciseModal({  closeModal,userData,workoutData,updateWorkout }) {
     
   const [prArr, setPrArr] = useState([])
   const [selectedExercise,setSelectedExercise] = useState('')
   const [currentSet,setCurrentSet] =useState(1)
   const [exerciseInfo,setExerciseInfo] = useState([]);
   const uid = userData.id
- 
+  const[updatedWorkout,setUpdatedWorkout] = useState({});
 
   const[newSetArr,setNewSetArr]=useState([])
 
@@ -36,6 +36,7 @@ const ExerciseRow =(props)=>{
 
     const[weightErr,setWeightErr] = useState(true);
     const[repsErr,setRepsErr] = useState(true);
+  
 
 
     useEffect(() => {
@@ -131,49 +132,77 @@ const deleteRow=()=>{
   
 }
 
-const updateFirebase=()=>{
+const updateFirebase = () => {
+  if (selectedExercise === "") {
+    alert("Please select an exercise");
+    return;
+  }
 
+  const emptySetIndex = exerciseInfo.findIndex(
+    (exercise) => exercise.reps === "" || exercise.weight === ""
+  );
 
+  if (emptySetIndex !== -1) {
+    alert("Please fill in all sets");
+    return;
+  }
 
-    if(selectedExercise==""){
-        alert("Please select an exercise")
-        return
-    }
-    const emptySetIndex = exerciseInfo.findIndex(
-        (exercise) => exercise.reps === "" || exercise.weight === ""
-      );
-    
-      if (emptySetIndex !== -1) {
-        alert("Please fill in all sets");
-        return;
-      }
+  const uid = userData.id;
 
-    const uid = userData.id;
-    const usersRef = firebase.firestore().collection('users').doc(uid);
-    const currentTime = firebase.firestore.FieldValue.serverTimestamp().toDate();
-    var formattedExerciseInfo= {}
-    var counter = 0;
-    exerciseInfo.map((currentExercise)=>{
-        counter+=1;
-        const exerciseKey = "set"+counter;
+  const currentDate = new Date();
+  const currentDocumentId = `${currentDate.getMonth() + 1},${currentDate.getFullYear()}`;
+  const workoutRef = firebase
+    .firestore()
+    .collection("users")
+    .doc(uid)
+    .collection("workouts")
+    .doc(currentDocumentId);
+
+  var formattedExerciseInfo = {};
+  var counter = 0;
+  exerciseInfo.map((currentExercise) => {
+    counter += 1;
+    const exerciseKey = "set" + counter;
+    formattedExerciseInfo[exerciseKey] = currentExercise;
+  });
+
+  const exerciseData = {
+    exercise: selectedExercise,
+    sets: formattedExerciseInfo,
+  };
+
+  const dictKey = `${currentDate.getMonth() + 1},${currentDate.getDate()},${currentDate.getFullYear()}`;
+
+  var existingWorkout = { ...workoutData };
+
+  if (existingWorkout[dictKey] !== undefined) {
+
+    existingWorkout[dictKey].push(exerciseData);
+  } else {
    
-        formattedExerciseInfo[exerciseKey]=currentExercise;
-    });
-    const exerciseData = {
-        exercise:selectedExercise,
-        sets:formattedExerciseInfo,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        
+    existingWorkout[dictKey] = [exerciseData];
+  }
 
-    }
-
-    usersRef.collection('pr').add(exerciseData).then(() => { alert("Exercise added") })
+  workoutRef
+    .update(existingWorkout)
+    .then(() => {
+      alert("Exercise added");
+      closeModal();
+    })
     .catch((error) => {
-        alert(error)
-        return "break"
+      alert(error);
     });
-    closeModal()
-}
+
+  setUpdatedWorkout(existingWorkout);
+ 
+
+  workoutData = existingWorkout;
+
+updateWorkout(workoutData);
+
+  closeModal();
+};
+
   return (
     <View style={styles.modalContainer}>
      <SelectList data={exerciseListData} save="value" style={[styles.dropdownStyle, {zIndex:999}]} setSelected={(val) => setSelectedExercise(val)}  />

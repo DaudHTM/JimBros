@@ -11,17 +11,14 @@ export default function TimestampWorkoutHistory({ userData, closeModal, timestam
   useEffect(() => {
     const fetchWorkoutData = async () => {
       try {
-        const querySnapshot = await prData.get();
-        const workouts = [];
 
-        querySnapshot.docs.forEach((doc) => {
-          const workout = doc.data();
-          const workoutTimestamp = workout.timestamp.toDate().toLocaleDateString();
+   
 
-          if (workoutTimestamp === timestamp) {
-            workouts.push(workout);
-          }
-        });
+
+   
+           const workouts=prData[timestamp];
+          
+        
 
         if (workouts.length > 0) {
           setWorkoutData(workouts);

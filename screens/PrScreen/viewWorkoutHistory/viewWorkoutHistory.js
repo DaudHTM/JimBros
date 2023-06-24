@@ -11,16 +11,8 @@ export default function ViewWorkoutHistory({ userData, closeModal, prData }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const querySnapshot = await prData.orderBy("timestamp", "desc").get();
-        const options = { day: 'numeric', month: 'numeric', year: 'numeric' };
-        const timestampsMap = new Map();
-
-        querySnapshot.docs.forEach((doc) => {
-          const date = doc.data().timestamp.toDate().toLocaleDateString(undefined, options);
-          timestampsMap.set(date, true);
-        });
-
-        const timestamps = Array.from(timestampsMap.keys());
+       
+        const timestamps = Object.keys(prData);
         setWorkoutHistory(timestamps);
       } catch (error) {
         console.log("Error fetching workout history:", error);

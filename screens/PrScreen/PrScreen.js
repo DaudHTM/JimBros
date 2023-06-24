@@ -3,7 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../assets/src/firebase/config";
 import { AddExerciseModal } from "./addExerciseModal/addExerciseModal";
-import { ViewWorkoutHistory } from "./viewWorkoutHistory/ViewWorkoutHistory";
+import { ViewWorkoutHistory } from "./ViewWorkoutHistory/ViewWorkoutHistory";
 
 export default function PrScreen({ navigation, userData }) {
   const uid = userData.id;
@@ -14,37 +14,51 @@ export default function PrScreen({ navigation, userData }) {
     .collection("pr");
   const [toggleModal, setToggleModal] = useState(false);
   const [workoutHistory, setWorkoutHistory] = useState(false);
-  const [workoutData, setWorkoutData] = useState([]);
+  const [workoutData, setWorkoutData] = useState({});
   const [log1, setLog1] = useState("Log 1");
   const [log2, setLog2] = useState("Log 2");
   const [log3, setLog3] = useState("Log 3");
 
+
+  const fetchData = async () => {
+    const currentDate = new Date();
+   
+    const currentDocId = `${currentDate.getMonth() + 1},${currentDate.getFullYear()}`;
+    console.log(currentDocId)
+
+    const workoutsRef = firebase
+      .firestore()
+      .collection("users")
+      .doc(userData.id)
+      .collection("workouts");
+
+    const workoutsSnapshots = await workoutsRef.doc(currentDocId).get();
+
+    if (workoutsSnapshots.exists) {
+      setWorkoutData(workoutsSnapshots.data());
+
+    } else {
+      workoutsRef.doc(currentDocId).set({});
+      setWorkoutData({})
+   
+    }
+
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const currentDate =
-        firebase.firestore.FieldValue.serverTimestamp().toDate();
-
-      currentDocId = currentDate.getMonth() + "/" + currentDate.getYear();
-
-      workoutsRef = firebase
-        .firestore()
-        .collection("users")
-        .doc(userData.id)
-        .collection("workouts");
-
-      workoutsSnapshots = workoutsRef.document(currentDocId).get();
-
-      if (workoutsSnapshots.exists) {
-        setWorkoutData(workoutsSnapshots.to_dict());
-
-        console.log(workoutData);
-      } else {
-        workoutsRef.doc(currentDocId).set({ month: currentDate.getMonth() });
-        workouts;
-      }
-    };
+  
     fetchData();
   }, []);
+
+  useEffect(() => {
+    console.log("Updated workoutData:", workoutData);
+  }, [workoutData]);
+
+  const updateWorkout=(newData)=>{
+setWorkoutData(newData)
+console.log("DFDFDFDF")
+console.log(workoutData);
+  }
 
   const toggleModalFunction = () => {
     setToggleModal(!toggleModal);
@@ -60,13 +74,15 @@ export default function PrScreen({ navigation, userData }) {
         <AddExerciseModal
           userData={userData}
           closeModal={toggleModalFunction}
+          workoutData={workoutData}
+          updateWorkout={updateWorkout}
         />
       ) : null}
       {workoutHistory ? (
         <ViewWorkoutHistory
           userData={userData}
           closeModal={showWorkouts}
-          prData={prRef}
+          prData={workoutData}
         />
       ) : null}
       <TouchableOpacity style={styles.logButton} onPress={toggleModalFunction}>
