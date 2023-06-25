@@ -168,7 +168,7 @@ console.log(currentDate)
                             usersRef
                                 .collection("workouts")
                                 .doc(currentDocumentId)
-                                .set(prData)
+                                .set({})
                                 .then(() => {
                                     navigation.navigate("Login");
                                 })
