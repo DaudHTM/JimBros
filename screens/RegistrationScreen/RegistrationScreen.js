@@ -8,9 +8,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 export default function RegistrationScreen({ navigation }) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [BirthDay, setBirthDay] = useState();
-  const [BirthMonth, setBirthMonth] = useState();
-  const [BirthYear, setBirthYear] = useState();
+  const [BirthDay, setBirthDay] = useState(27);
+  const [BirthMonth, setBirthMonth] = useState(6);
+  const [BirthYear, setBirthYear] = useState(2023);
   const [BirthDateObj, setBirthDateObj] = useState(new Date());
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -296,33 +296,32 @@ export default function RegistrationScreen({ navigation }) {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "center",
+            flex:1,
             alignItems: "center",
-            marginLeft: "8%",
-            marginRight: "8%",
-            width: "84%",
-            height: 40,
+  
+            paddingLeft:35,
+            height: 80,
+          
           }}
         >
-          <Text style={{ fontSize: 20 }}>Birthdate: </Text>
+          <Text style={{ fontSize: 18,fontWeight:'420', }}>Birthdate: </Text>
 
-          <View style={styles.datePicker}>
             {showBirthDatePicker ? (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={BirthDateObj}
                 mode="date"
                 onChange={onDateChange}
-                style={{ height: 40 }}
+                style={{ height: 45,width:200, }}
               />
             ) : null}
-            <TouchableOpacity
+            <TouchableOpacity style={styles.newbdinput}
               onPress={() => setShowBirthDatePicker(!showBirthDatePicker)}
             >
-              <Text>{BirthMonth + "/" + BirthDay + "/" + BirthYear}</Text>
+              <Text style={{color:'grey',fontSize:16,}}>{BirthMonth + "/" + BirthDay + "/" + BirthYear}</Text>
             </TouchableOpacity>
           </View>
-        </View>
+    
 
         <Text style={styles.registrationText}>❸ Login Info</Text>
 

@@ -35,6 +35,17 @@ export default StyleSheet.create({
         marginRight: "8%",
         paddingLeft: "5%"
     },
+    newbdinput:{
+        backgroundColor: 'white',
+     
+      
+        height: 48,
+        borderRadius: 5,
+        width:200,
+        alignItems: "center",
+        justifyContent: 'center',
+        marginLeft:20,
+    },
     BirthDate: {
         height: 48,
 

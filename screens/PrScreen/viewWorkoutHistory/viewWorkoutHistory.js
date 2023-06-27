@@ -12,7 +12,10 @@ export default function ViewWorkoutHistory({ userData, closeModal, prData }) {
     const fetchData = async () => {
       try {
        
-        const timestamps = Object.keys(prData);
+        const timestamps = Object.keys(prData).map((timestamp) => {
+          return timestamp.replace(/,/g, '/');
+        });
+        timestamps.sort((a, b) => new Date(b) - new Date(a));
         setWorkoutHistory(timestamps);
       } catch (error) {
         console.log("Error fetching workout history:", error);
@@ -23,7 +26,7 @@ export default function ViewWorkoutHistory({ userData, closeModal, prData }) {
   }, []);
 
   const handleWorkoutItemPress = (timestamp) => {
-    setSelectedTimestamp(timestamp);
+    setSelectedTimestamp(timestamp.replace(/\//g, ','));
   };
 
   const handleCloseTimestampWorkoutHistory = () => {
