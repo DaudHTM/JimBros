@@ -6,11 +6,6 @@ import { firebase } from "../../assets/src/firebase/config";
 import { EditBioScreen } from "./EditBioScreen/EditBioScreen";
 import { AboutUsScreen } from "./AboutUsScreen/AboutUsScreen";
 
-/*
-TO DO:
-Allow user to add profile picture in circle (log in firebase)
-*/
-
 export default function AccountScreen({ navigation, userData, signOut }) {
   const calcAge = (birthdate) => {
     const todayDate = new Date();

@@ -3,7 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../assets/src/firebase/config";
 import { AddExerciseModal } from "./addExerciseModal/addExerciseModal";
-import { ViewWorkoutHistory } from "./ViewWorkoutHistory/ViewWorkoutHistory";
+import { ViewWorkoutHistory } from "./viewWorkoutHistory/ViewWorkoutHistory";
 
 export default function PrScreen({ navigation, userData }) {
   const uid = userData.id;
@@ -19,12 +19,13 @@ export default function PrScreen({ navigation, userData }) {
   const [log2, setLog2] = useState("Log 2");
   const [log3, setLog3] = useState("Log 3");
 
-
   const fetchData = async () => {
     const currentDate = new Date();
-   
-    const currentDocId = `${currentDate.getMonth() + 1},${currentDate.getFullYear()}`;
-    console.log(currentDocId)
+
+    const currentDocId = `${
+      currentDate.getMonth() + 1
+    },${currentDate.getFullYear()}`;
+    console.log(currentDocId);
 
     const workoutsRef = firebase
       .firestore()
@@ -36,17 +37,13 @@ export default function PrScreen({ navigation, userData }) {
 
     if (workoutsSnapshots.exists) {
       setWorkoutData(workoutsSnapshots.data());
-
     } else {
       workoutsRef.doc(currentDocId).set({});
-      setWorkoutData({})
-   
+      setWorkoutData({});
     }
-
   };
 
   useEffect(() => {
-  
     fetchData();
   }, []);
 
@@ -54,11 +51,11 @@ export default function PrScreen({ navigation, userData }) {
     console.log("Updated workoutData:", workoutData);
   }, [workoutData]);
 
-  const updateWorkout=(newData)=>{
-setWorkoutData(newData)
-console.log("DFDFDFDF")
-console.log(workoutData);
-  }
+  const updateWorkout = (newData) => {
+    setWorkoutData(newData);
+    console.log("DFDFDFDF");
+    console.log(workoutData);
+  };
 
   const toggleModalFunction = () => {
     setToggleModal(!toggleModal);

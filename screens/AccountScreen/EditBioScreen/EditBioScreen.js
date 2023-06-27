@@ -45,7 +45,7 @@ export default function EditBioScreen({ userData, closeModal }) {
     usersRef.set(identification);
 
     usersRef
-      .collection("info")
+      .collection("private")
       .doc(uid)
       .set(bioInfo)
       .then(() => {
@@ -63,7 +63,7 @@ export default function EditBioScreen({ userData, closeModal }) {
     setBirthDateObj(date);
     if (date instanceof Date) {
       setBirthDay(date.getDate());
-      setBirthMonth(date.getMonth());
+      setBirthMonth(date.getMonth() + 1);
       setBirthYear(date.getFullYear());
     }
     setShowBirthDatePicker(false);
