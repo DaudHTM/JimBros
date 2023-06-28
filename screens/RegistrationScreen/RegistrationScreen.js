@@ -169,7 +169,7 @@ export default function RegistrationScreen({ navigation }) {
               usersRef
                 .collection("social")
                 .doc(uid)
-                .set(prData)
+                .set({communities:{},friends:{}})
                 .then(() => {})
                 .catch((error) => {
                   alert(error);
