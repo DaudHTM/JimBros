@@ -19,6 +19,7 @@ export default StyleSheet.create({
     fontSize: 20,
     marginLeft: "10%",
     marginTop: 20,
+    marginBottom: -5,
     fontWeight: "bold",
   },
   input: {
@@ -31,6 +32,15 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: "white",
     textAlign: "left",
+  },
+  bdayInput: {
+    backgroundColor: "white",
+    height: 48,
+    borderRadius: 5,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 20,
   },
   aboutMeInput: {
     marginTop: "5%",

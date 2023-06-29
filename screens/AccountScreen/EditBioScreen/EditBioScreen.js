@@ -114,32 +114,33 @@ export default function EditBioScreen({ userData, closeModal }) {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "center",
+            flex: 1,
             alignItems: "center",
-            marginLeft: "8%",
-            marginRight: "8%",
-            width: "84%",
-            height: 40,
+            paddingLeft: 35,
+            height: 60,
           }}
         >
-          <Text style={{ fontSize: 15 }}>Birthdate: </Text>
+          <Text style={{ fontSize: 18, fontWeight: "420", marginLeft: 20 }}>
+            Birthdate:{" "}
+          </Text>
 
-          <View>
-            {showBirthDatePicker ? (
-              <DateTimePicker
-                testID="dateTimePicker2"
-                value={BirthDateObj}
-                mode="date"
-                onChange={onDateChange}
-                style={{ height: 40 }}
-              />
-            ) : null}
-            <TouchableOpacity
-              onPress={() => setShowBirthDatePicker(!showBirthDatePicker)}
-            >
-              <Text>{birthMonth + "/" + birthDay + "/" + birthYear}</Text>
-            </TouchableOpacity>
-          </View>
+          {showBirthDatePicker ? (
+            <DateTimePicker
+              testID="dateTimePicker2"
+              value={BirthDateObj}
+              mode="date"
+              onChange={onDateChange}
+              style={{ height: 45, width: 200 }}
+            />
+          ) : null}
+          <TouchableOpacity
+            style={styles.bdayInput}
+            onPress={() => setShowBirthDatePicker(!showBirthDatePicker)}
+          >
+            <Text style={{ color: "grey", fontSize: 16 }}>
+              {birthMonth + "/" + birthDay + "/" + birthYear}
+            </Text>
+          </TouchableOpacity>
         </View>
         {/*
         <TextInput

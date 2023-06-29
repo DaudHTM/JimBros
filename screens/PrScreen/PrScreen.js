@@ -3,7 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { firebase } from "../../assets/src/firebase/config";
 import { AddExerciseModal } from "./addExerciseModal/addExerciseModal";
-import { ViewWorkoutHistory } from "./ViewWorkoutHistory/ViewWorkoutHistory";
+import { ViewWorkoutHistory } from "./viewWorkoutHistory/viewWorkoutHistory";
 
 export default function PrScreen({ navigation, userData }) {
   const uid = userData.id;
@@ -25,7 +25,6 @@ export default function PrScreen({ navigation, userData }) {
     const currentDocId = `${
       currentDate.getMonth() + 1
     },${currentDate.getFullYear()}`;
-  
 
     const workoutsRef = firebase
       .firestore()
@@ -47,13 +46,10 @@ export default function PrScreen({ navigation, userData }) {
     fetchData();
   }, []);
 
-  useEffect(() => {
-   
-  }, [workoutData]);
+  useEffect(() => {}, [workoutData]);
 
   const updateWorkout = (newData) => {
     setWorkoutData(newData);
-   
   };
 
   const toggleModalFunction = () => {
